@@ -24,7 +24,7 @@ public class ApiGatewayApplication {
     public RouteLocator getwayRoutes (RouteLocatorBuilder builder){
 
         return builder.routes()
-                .route("reclamation-service",r->r.path("/reclamations/**").uri("lb://reclamation-service"))
+                .route("reclamation_service",r->r.path("/reclamations/**").uri("lb://reclamation_service"))
                 .build();
     }
 
