@@ -1,3 +1,8 @@
 # Ignore Reclamation Service's specific .gitignore
 /reclamation_service/.gitignore
 
+# Ignore EurekaApplication Service's specific .gitignore
+EurekaApplication/.gitignore
+
+# Ignore api-gateway Service's specific .gitignore
+api-gateway/.gitignore
