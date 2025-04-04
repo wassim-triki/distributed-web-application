@@ -1,0 +1,3 @@
+# Ignore Reclamation Service's specific .gitignore
+/reclamation_service/.gitignore
+
