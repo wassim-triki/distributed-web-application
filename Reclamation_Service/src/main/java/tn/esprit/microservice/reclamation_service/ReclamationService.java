@@ -5,6 +5,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
+import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
+
+
+
 @Service
 public class   ReclamationService {
 
@@ -50,4 +57,16 @@ public class   ReclamationService {
     public Optional<Reclamation> getReclamationById(int id) {
         return reclamationRepository.findById(id);
     }
+
+
+
+    // filter reclamations by type
+    public List<Reclamation> getReclamationsByType(TypeReclamation type) {
+        return reclamationRepository.findByType(type);
+    }
+
+
+
+
+
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/reclamations")
@@ -47,4 +48,15 @@ public class ReclamationRestAPI {
     public String sayHello() {
         return "Hello from Reclamation Microservice!";
     }
+
+    // Optional: endpoint to get reclamations by type
+    // http://localhost:8083/reclamations/filter?type=PRODUIT_ENDOMMAGE
+    @GetMapping("/filter")
+    public ResponseEntity<List<Reclamation>> getReclamationsByType(@RequestParam TypeReclamation type) {
+        return ResponseEntity.ok(reclamationService.getReclamationsByType(type));
+    }
+
+
+
+
 }
