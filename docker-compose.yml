@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+
+
+  Reclamation_Service:
+    container_name: reclamation_service
+    image: dark9040/reclamation_service
+    build: .\reclamation_service
+    ports:
+      - "8083:8083"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
+    depends_on:
+      - Eureka
+
+
+
+
+  Eureka:
+    container_name: eureka
+    build: .\EurekaApplication
+    hostname: serviceregistry
+    ports:
+      - "8761:8761"
+    image: dark9040/eureka
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
+
+
+
+  api-gateway:
+    build: .\api-gateway
+    image: dark9040/apigateway
+    ports:
+      - "8093:8093"  # Port mapping pour l'API Gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - "Eureka"
+      - "Reclamation_Service"
