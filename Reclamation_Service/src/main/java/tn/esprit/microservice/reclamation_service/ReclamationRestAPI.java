@@ -50,13 +50,18 @@ public class ReclamationRestAPI {
     }
 
     // Optional: endpoint to get reclamations by type
-    // http://localhost:8083/reclamations/filter?type=PRODUIT_ENDOMMAGE
+
     @GetMapping("/filter")
     public ResponseEntity<List<Reclamation>> getReclamationsByType(@RequestParam TypeReclamation type) {
         return ResponseEntity.ok(reclamationService.getReclamationsByType(type));
     }
 
+    // Optional: endpoint to get reclamation statistics
 
+    @GetMapping("/stats")
+    public ResponseEntity<Map<String, Object>> getReclamationStats() {
+        return ResponseEntity.ok(reclamationService.getReclamationStats());
+    }
 
 
 }

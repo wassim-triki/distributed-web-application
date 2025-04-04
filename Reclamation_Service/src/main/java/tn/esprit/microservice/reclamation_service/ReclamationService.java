@@ -11,17 +11,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 @Service
 public class   ReclamationService {
 
     private final ReclamationRepository reclamationRepository;
 
-    public ReclamationService(ReclamationRepository reclamationRepository) {
+   /* public ReclamationService(ReclamationRepository reclamationRepository) {
         this.reclamationRepository = reclamationRepository;
+    }*/
+   public ReclamationService(ReclamationRepository reclamationRepository ) {
+       this.reclamationRepository = reclamationRepository;
     }
 
-    public Reclamation addReclamation(Reclamation reclamation) {
+    /*public Reclamation addReclamation(Reclamation reclamation) {
         // Default values if not set
         if (reclamation.getStatut() == null) {
             reclamation.setStatut("En attente");
@@ -30,7 +32,20 @@ public class   ReclamationService {
             reclamation.setDateReclamation(new java.util.Date());
         }
         return reclamationRepository.save(reclamation);
+    }*/
+
+    public Reclamation addReclamation(Reclamation reclamation) {
+        if (reclamation.getStatut() == null) {
+            reclamation.setStatut("En attente");
+        }
+        if (reclamation.getDateReclamation() == null) {
+            reclamation.setDateReclamation(new java.util.Date());
+        }
+
+        Reclamation saved = reclamationRepository.save(reclamation);
+        return saved;
     }
+
 
     public Reclamation updateReclamation(int id, Reclamation updatedReclamation) {
         return reclamationRepository.findById(id).map(existing -> {
@@ -61,9 +76,33 @@ public class   ReclamationService {
 
 
     // filter reclamations by type
+    // http://localhost:8083/reclamations/filter?type=PRODUIT_ENDOMMAGE
     public List<Reclamation> getReclamationsByType(TypeReclamation type) {
         return reclamationRepository.findByType(type);
     }
+
+
+    // Get reclamation statistics
+    //  http://localhost:8083/reclamations/stats
+    public Map<String, Object> getReclamationStats() {
+        List<Reclamation> all = reclamationRepository.findAll();
+
+        long total = all.size();
+
+        Map<String, Long> byType = all.stream()
+                .collect(Collectors.groupingBy(r -> r.getType().toString(), Collectors.counting()));
+
+        Map<String, Long> byStatus = all.stream()
+                .collect(Collectors.groupingBy(Reclamation::getStatut, Collectors.counting()));
+
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("total", total);
+        stats.put("byType", byType);
+        stats.put("byStatus", byStatus);
+
+        return stats;
+    }
+
 
 
 
