@@ -1,4 +1,8 @@
 FROM openjdk:17
 EXPOSE 8761
-ADD "target/EurekaApplication-0.0.1-SNAPSHOT.jar" "EurekaApplication.jar"
-ENTRYPOINT ["java","-jar","eureka.jar"]
+
+# Copy the JAR file into the container
+ADD target/EurekaApplication-0.0.1-SNAPSHOT.jar /eureka.jar
+
+# Set the entry point to run the JAR file
+ENTRYPOINT ["java", "-jar", "/eureka.jar"]

@@ -59,10 +59,10 @@ server.port=8084
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2
 spring.datasource.url=jdbc:h2:file:./Database/Data/reclamation
-spring.datasource.username=malek
+spring.datasource.username=chaher
 spring.datasource.password=
-spring.jpa.hibernate.ddl-auto=create
-
+spring.jpa.hibernate.ddl-auto=update
+ 
 # Eureka
 eureka.client.register-with-eureka=true
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
