@@ -21,10 +21,10 @@ public class ApiGatewayApplication {
     }
 
     @Bean
-    public RouteLocator getwayRoutes (RouteLocatorBuilder builder){
-
+    public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("reclamation_service",r->r.path("/reclamations/**").uri("lb://reclamation_service"))
+                .route("reclamation_service", r -> r.path("/reclamations/**") // Adjusted path
+                        .uri("lb://reclamation-service")) // The exact service name in Eureka
                 .build();
     }
 
