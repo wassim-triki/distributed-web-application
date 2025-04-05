@@ -40,6 +40,9 @@ public class   ReclamationService {
         return reclamationRepository.save(reclamation);
     }*/
 
+    // Add reclamation with default values
+    // http://localhost:8083/reclamations
+
     public Reclamation addReclamation(Reclamation reclamation) {
         if (reclamation.getStatut() == null) {
             reclamation.setStatut("En attente");
@@ -53,7 +56,7 @@ public class   ReclamationService {
         return saved;
     }
 
-
+    // Update reclamation
     public Reclamation updateReclamation(int id, Reclamation updatedReclamation) {
         return reclamationRepository.findById(id).map(existing -> {
             existing.setDescription(updatedReclamation.getDescription());
@@ -65,6 +68,7 @@ public class   ReclamationService {
         }).orElseThrow(() -> new RuntimeException("Reclamation non trouvée avec ID: " + id));
     }
 
+    // Delete reclamation
     public void deleteReclamation(int id) {
         if (!reclamationRepository.existsById(id)) {
             throw new RuntimeException("Reclamation non trouvée avec ID: " + id);
@@ -72,9 +76,12 @@ public class   ReclamationService {
         reclamationRepository.deleteById(id);
     }
 
+    // Get all reclamations
+    // http://localhost:8083/reclamations
     public List<Reclamation> getAllReclamations() {
         return reclamationRepository.findAll();
     }
+
 
     public Optional<Reclamation> getReclamationById(int id) {
         return reclamationRepository.findById(id);
@@ -108,6 +115,21 @@ public class   ReclamationService {
         stats.put("byStatus", byStatus);
 
         return stats;
+    }
+
+    // Get monthly reclamation statistics
+    // http://localhost:8083/reclamations/stats/monthly
+    public Map<String, Long> getMonthlyReclamationStats() {
+        List<Reclamation> all = reclamationRepository.findAll();
+
+        return all.stream()
+                .collect(Collectors.groupingBy(
+                        r -> {
+                            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM");
+                            return sdf.format(r.getDateReclamation());
+                        },
+                        Collectors.counting()
+                ));
     }
 
 
