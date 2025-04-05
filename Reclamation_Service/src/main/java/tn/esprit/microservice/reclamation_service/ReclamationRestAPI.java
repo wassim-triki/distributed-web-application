@@ -63,5 +63,12 @@ public class ReclamationRestAPI {
         return ResponseEntity.ok(reclamationService.getReclamationStats());
     }
 
+    // Optional: endpoint to get monthly statistics
+
+    @GetMapping("/stats/monthly")
+    public ResponseEntity<Map<String, Long>> getMonthlyStats() {
+        return ResponseEntity.ok(reclamationService.getMonthlyReclamationStats());
+    }
+
 
 }
