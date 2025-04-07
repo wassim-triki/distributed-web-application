@@ -25,8 +25,14 @@ public class ApiGatewayApplication {
         return builder.routes()
                 .route("reclamation_service", r -> r.path("/reclamations/**") // Adjusted path
                         .uri("lb://reclamation-service")) // The exact service name in Eureka
+                .route("stock_service", r -> r.path("/stocks/**") // Adjusted path
+                        .uri("lb://stock-service")) // The exact service name in Eureka
+
+
+
                 .build();
     }
+
 
 
 }
