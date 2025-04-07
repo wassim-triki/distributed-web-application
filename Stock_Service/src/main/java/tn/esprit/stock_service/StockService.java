@@ -46,5 +46,18 @@ public class StockService {
         return stockRepository.findByProductId(productId);
     }
 
+///Fonc Avancées
+public StockStatisticsDTO getStatistics() {
+    List<Stock> allStocks = stockRepository.findAll();
+
+    long totalStockItems = allStocks.size();
+    long totalQuantity = allStocks.stream().mapToLong(Stock::getQuantity).sum();
+
+    long availableCount = allStocks.stream().filter(s -> s.getStatus() == StockStatus.AVAILABLE).count();
+    long outOfStockCount = allStocks.stream().filter(s -> s.getStatus() == StockStatus.OUT_OF_STOCK).count();
+    long reservedCount = allStocks.stream().filter(s -> s.getStatus() == StockStatus.RESERVED).count();
+
+    return new StockStatisticsDTO(totalStockItems, totalQuantity, availableCount, outOfStockCount, reservedCount);
+}
 
 }

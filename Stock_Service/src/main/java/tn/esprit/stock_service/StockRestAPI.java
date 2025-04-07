@@ -51,9 +51,16 @@ public class StockRestAPI {
         }
     }
 
+    //////FA
+
     //http://localhost:8085/stocks/filter?status=AVAILABLE
     @GetMapping("/filter")
     public ResponseEntity<List<Stock>> getStockByStatus(@RequestParam StockStatus status) {
         return ResponseEntity.ok(stockService.getStockByStatus(status));
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<StockStatisticsDTO> getStatistics() {
+        return ResponseEntity.ok(stockService.getStatistics());
     }
 }
