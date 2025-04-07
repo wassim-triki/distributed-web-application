@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/database.js');
 const customerRoutes = require('./routes/customer.routes.js');
+const eureka = require('./config/eureka.js');
+const registerWithEureka = require('./config/eureka.js');
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ app.use(cors()); // Enable CORS
 app.use(express.json()); // Body parser
 
 // Routes
+
 app.use('/customers', customerRoutes);
 
 app.use((err, req, res, next) => {
@@ -24,6 +27,7 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
-  console.log(`Customer Service API is running on port ${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`Customer Service API is running on port ${PORT}`);
+  registerWithEureka(PORT); // Register only after server is up
+});
