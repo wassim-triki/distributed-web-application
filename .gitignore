@@ -6,3 +6,5 @@ EurekaApplication/.gitignore
 
 # Ignore api-gateway Service's specific .gitignore
 api-gateway/.gitignore
+
+customer-service/.gitignore
