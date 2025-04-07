@@ -34,6 +34,10 @@ public class StockService {
         return stockRepository.findAll();
     }
 
+    public Stock getStockById(int id) {
+        return stockRepository.findById(id).orElse(null);
+    }
+
     public List<Stock> getStockByStatus(StockStatus status) {
         return stockRepository.findByStatus(status);
     }

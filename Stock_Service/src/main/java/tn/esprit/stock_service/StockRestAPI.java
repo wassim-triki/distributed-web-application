@@ -17,18 +17,18 @@ public class StockRestAPI {
         this.stockService = stockService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Stock> createStock(@RequestBody Stock stock) {
         return ResponseEntity.ok(stockService.addStock(stock));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}")
     public ResponseEntity<Stock> updateStock(@PathVariable int id, @RequestBody Stock stock) {
         return ResponseEntity.ok(stockService.updateStock(id, stock));
     }
 
     //
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteStock(@PathVariable int id) {
         stockService.deleteStock(id);
         return ResponseEntity.noContent().build();
@@ -40,6 +40,16 @@ public class StockRestAPI {
         return ResponseEntity.ok(stockService.getAllStock());
     }
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Stock> getStockById(@PathVariable int id) {
+        Stock stock = stockService.getStockById(id);
+        if (stock != null) {
+            return ResponseEntity.ok(stock);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     //http://localhost:8085/stocks/filter?status=AVAILABLE
     @GetMapping("/filter")
