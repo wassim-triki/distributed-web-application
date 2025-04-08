@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.ordreservice.entity.Order;
 import tn.esprit.ordreservice.service.OrderService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class RestControllerOrder {
     }
 
 
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Integer> createOrder(@RequestBody @Valid Order order) {
         return ResponseEntity.ok(service.createOrder(order));
     }
@@ -33,4 +34,7 @@ public class RestControllerOrder {
     public ResponseEntity<Order> findById(  @PathVariable("order-id") Integer orderId) {
         return ResponseEntity.ok(service.findById(orderId));
     }
+
+
+
 }

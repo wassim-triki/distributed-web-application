@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.ordreservice.entity.Order;
 import tn.esprit.ordreservice.repository.OrderRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -21,15 +22,21 @@ public class OrderService {
 
     @Transactional
     public Integer createOrder(Order order) {
-        // Étape clé : lier chaque OrderLine à l'Order parent
+        // Étape 1 : lier chaque OrderLine à l'Order parent
         if (order.getOrderLines() != null) {
             order.getOrderLines().forEach(line -> line.setOrder(order));
         }
 
+        // Étape 2 : Calcul du total de la commande
+        BigDecimal totalAmount = order.getTotalAmount();
+        System.out.println("✅ Montant total de la commande : " + totalAmount);
+
+        // (Optionnel) Tu peux aussi stocker totalAmount dans un champ Order s'il est persisté
+
+        // Étape 3 : Sauvegarder la commande
         var savedOrder = repository.save(order);
         return savedOrder.getId();
     }
-
 
     public List<Order> findAllOrders() {
         return repository.findAll();

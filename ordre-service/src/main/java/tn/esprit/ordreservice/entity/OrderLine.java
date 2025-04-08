@@ -1,8 +1,11 @@
 package tn.esprit.ordreservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.math.BigDecimal;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)  // Ajouté pour l'auditing
@@ -12,23 +15,27 @@ public class OrderLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    @JsonIgnore
-    private Order order;
+
 
     private Integer productId;
     private double quantity;
 
+    private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    @JsonBackReference
+    private Order order;
     // Constructeur par défaut
     public OrderLine() {
     }
 
     // Constructeur avec tous les champs
-    public OrderLine( Order order, Integer productId, double quantity) {
+    public OrderLine( Order order, Integer productId, double quantity , BigDecimal price) {
         this.order = order;
         this.productId = productId;
         this.quantity = quantity;
+        this.price = price;
     }
 
     // Getter et Setter pour id
@@ -65,5 +72,11 @@ public class OrderLine {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+    public BigDecimal getPrice() {
+        return price;
+    }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

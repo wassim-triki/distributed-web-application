@@ -24,13 +24,10 @@ public class Order {
     @Column(unique = true,  nullable = false)
     private String reference;
 
-    private BigDecimal totalAmount;
-
     private String customerId;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-
     private List<OrderLine> orderLines;
 
     @CreatedDate
@@ -41,16 +38,28 @@ public class Order {
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
 
+    @Transient // Ne sera pas stocké en base, c’est juste calculé dynamiquement
+    @Column(nullable = false)
+    private BigDecimal totalAmount;
+
+    public BigDecimal getTotalAmount() {
+        if (orderLines == null) return BigDecimal.ZERO;
+
+        return orderLines.stream()
+                .map(line -> line.getPrice().multiply(BigDecimal.valueOf(line.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
     // Constructeur vide
     public Order() {
     }
 
     // Constructeur paramétré sans 'id' (car 'id' est généré automatiquement)
-    public Order(String reference, BigDecimal totalAmount, String customerId, List<OrderLine> orderLines) {
+    public Order(String reference, String customerId, List<OrderLine> orderLines) {
         this.reference = reference;
-        this.totalAmount = totalAmount;
         this.customerId = customerId;
         this.orderLines = orderLines;
+
     }
 
     // Getters et Setters
@@ -71,13 +80,6 @@ public class Order {
         this.reference = reference;
     }
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
 
     public String getCustomerId() {
         return customerId;
@@ -109,5 +111,9 @@ public class Order {
 
     public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }
