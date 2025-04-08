@@ -1,77 +1,112 @@
-# 🛠️ Reclamation Service
+# 🛠️ **Reclamation Service**
 
-This microservice is responsible for handling user **reclamations (complaints/feedback)** in a distributed microservice-based application.
+This microservice handles user **reclamations (complaints/feedback)** in a distributed microservice-based application. It supports adding, retrieving, and processing complaints, along with generating QR codes and PDF reports.
 
-## 📦 Technologies Used
+## 📦 **Technologies Used**
 
-- Java 17
-- Spring Boot 3
-- Spring Data JPA
-- Spring Cloud (Eureka Client, Config)
-- H2 Database
-- Docker
+- **Java 17** – The primary programming language.
+- **Spring Boot 3** – Framework used for building the application.
+- **Spring Data JPA** – For data persistence.
+- **Spring Cloud** – Includes Eureka Client for service discovery and Spring Cloud Config for externalized configuration.
+- **H2 Database** – In-memory database for development and testing.
+- **Docker** – For containerizing the microservice.
+- **QR Code Generation** – For generating unique QR codes for reclamations.
 
-## 🚀 How to Run
+## 🚀 **How to Run**
 
-### Prerequisites
+### **Prerequisites**
 
-- JDK 17+
-- Maven
-- Docker (optional)
-- Eureka Server running on `http://localhost:8761/`
-- Spring Cloud Config Server running on `http://localhost:8888/`
+Before running the service, make sure you have the following installed:
 
-### Run with Maven
+- **JDK 17+**
+- **Maven** – For building the project.
+- **Docker** (optional but recommended)
+- **Eureka Server** – Running on `http://localhost:8761/` for service discovery.
+- **Spring Cloud Config Server** – Running on `http://localhost:8888/` for externalized configuration.
 
-```bash
-mvn clean install
-mvn spring-boot:run
-Run with Docker
-First, build the JAR:
+### **Running with Docker**
 
-bash
-Copy
-Edit
-mvn clean package
-Then build and run the Docker container:
+1. **Build the JAR:**
+
+   ```bash
+   mvn clean package
+Build the Docker image:
 
 bash
 Copy
 Edit
 docker build -t reclamation_service .
+Run the Docker container:
+
+bash
+Copy
+Edit
 docker run -p 8084:8084 --name reclamation_service reclamation_service
-Make sure port 8084 is free or adjust it as needed.
+Make sure port 8084 is available, or modify the port if necessary.
+
+Accessing the Service
+Once the service is running, it will be available at:
+http://localhost:8084/
+
+Eureka Server & Config Server
+Ensure your Eureka Server is running at http://localhost:8761/ to allow the service to register.
+
+The Spring Cloud Config Server should be running at http://localhost:8888/ to provide external configuration.
 
 🌐 Endpoints
 Method	Endpoint	Description
-GET	/reclamations/hello	Test endpoint to say hello
-(More)	(To be expanded)	Add other endpoints as needed
-⚙️ Configuration
-application.properties includes:
+GET	/reclamations/hello	Test endpoint to say "Hello" from the Reclamation Service.
+POST	/reclamations	Add a new reclamation (complaint).
+GET	/reclamations	Retrieve all reclamations.
+GET	/reclamations/{id}	Retrieve a specific reclamation by ID.
+PUT	/reclamations/{id}	Update an existing reclamation by ID.
+DELETE	/reclamations/{id}	Delete a reclamation by ID.
+GET	/reclamations/{id}/qr	Generate a QR code for a specific reclamation.
+GET	/reclamations/qr/{filename:.+}	Retrieve the QR code image for a reclamation.
+GET	/reclamations/pdf	Download all reclamations as a PDF document.
+QR Code Generation
+Each reclamation can generate a unique QR code that includes details such as the reclamation ID, description, order ID, status, and client email.
 
+The QR code can be accessed through the endpoint GET /reclamations/{id}/qr.
+
+You can retrieve the generated QR code image by visiting GET /reclamations/qr/{filename}.
+
+⚙️ Configuration
+application.properties
 properties
 Copy
 Edit
+# Reclamation Service Configuration
+
+# Application Name and Port
 spring.application.name=ReclamationService
 server.port=8084
 
-# H2 Database
+# H2 Database Configuration (for development and testing)
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2
 spring.datasource.url=jdbc:h2:file:./Database/Data/reclamation
 spring.datasource.username=chaher
 spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
- 
-# Eureka
+
+# Eureka Service Registration
 eureka.client.register-with-eureka=true
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 
-# Config Server
+# Spring Cloud Config
 spring.cloud.config.enabled=true
 spring.config.import=optional:configserver:http://localhost:8888
+Database Configuration
+The service uses an H2 database for development purposes. You can access the H2 database console at http://localhost:8084/h2 when the application is running.
+
+Eureka & Config Server
+The application registers with Eureka for service discovery.
+
+The Spring Cloud Config Server loads externalized configurations.
+
 📁 Project Structure
-swift
+plaintext
 Copy
 Edit
 Reclamation_Service/
@@ -85,16 +120,38 @@ Reclamation_Service/
 ├── Dockerfile
 ├── pom.xml
 └── README.md  ← You are here
-🧪 Testing
-You can test the basic endpoint:
+🧪 Testing the Service
+You can test the basic functionality by using the following curl command:
 
 bash
 Copy
 Edit
 curl http://localhost:8084/reclamations/hello
+This should return a simple message like:
+"Hello from Reclamation Service!"
+
 🧑‍💻 Author
 Dridi Chaher – Intern at Banque de Tunisie
 
 GitHub: chahe-dridi
 
-This microservice is part of the distributed project: distributed-web-application
+This microservice is part of the distributed-web-application project.
+
+🚀 Contributing
+Feel free to fork this repository and submit issues or pull requests if you'd like to contribute.
+
+License
+Distributed under the MIT License. See LICENSE for more information.
+
+yaml
+Copy
+Edit
+
+---
+
+### Changes Made:
+- Removed the "Run the project" section, keeping only the Docker-related instructions.
+- Updated the sections to keep the information clear and concise for users who want to quickly understand how to run the service.
+- Kept all essential details like the configuration, project structure, and endpoints.
+
+This should now be ready for your GitHub repository!
