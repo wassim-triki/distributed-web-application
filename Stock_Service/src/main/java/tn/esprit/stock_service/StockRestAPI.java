@@ -68,10 +68,15 @@ public class StockRestAPI {
 
     //////FA
 
-    //http://localhost:8085/stocks/filter?status=AVAILABLE
+//http://localhost:8093/stocks/filter?status=RESERVED&location=Bizerte&quantityGreaterThan=15
     @GetMapping("/filter")
-    public ResponseEntity<List<Stock>> getStockByStatus(@RequestParam StockStatus status) {
-        return ResponseEntity.ok(stockService.getStockByStatus(status));
+    public ResponseEntity<List<Stock>> filterStocks(
+            @RequestParam(required = false) StockStatus status,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) Integer quantityGreaterThan
+    ) {
+        List<Stock> filtered = stockService.filterStock(status, location, quantityGreaterThan != null ? quantityGreaterThan : 10);
+        return ResponseEntity.ok(filtered);
     }
 
     @GetMapping("/statistics")
@@ -101,5 +106,5 @@ public class StockRestAPI {
 
         return new ResponseEntity<>(excelData, headers, HttpStatus.OK);
     }
-    
+
 }
