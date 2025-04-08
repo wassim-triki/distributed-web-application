@@ -13,9 +13,16 @@ public class ReclamationRestAPI {
 
     private final ReclamationService reclamationService;
 
-    public ReclamationRestAPI(ReclamationService reclamationService) {
+    /*  public ReclamationRestAPI(ReclamationService reclamationService) {
         this.reclamationService = reclamationService;
+    }*/
+    private final QRCodeService qrCodeService;
+
+    public ReclamationRestAPI(ReclamationService reclamationService, QRCodeService qrCodeService) {
+        this.reclamationService = reclamationService;
+        this.qrCodeService = qrCodeService;
     }
+
 
     @PostMapping
     public ResponseEntity<Reclamation> createReclamation(@RequestBody Reclamation reclamation) {
@@ -69,6 +76,19 @@ public class ReclamationRestAPI {
     public ResponseEntity<Map<String, Long>> getMonthlyStats() {
         return ResponseEntity.ok(reclamationService.getMonthlyReclamationStats());
     }
+
+
+    // Endpoint to generate QR code for a reclamation
+    @GetMapping("/{id}/qr")
+    public ResponseEntity<String> generateQRCode(@PathVariable int id) {
+        try {
+            String url = qrCodeService.generateQRCodeForReclamation(id);
+            return ResponseEntity.ok(url);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erreur lors de la génération du QR Code: " + e.getMessage());
+        }
+    }
+
 
 
 }
