@@ -30,8 +30,8 @@ public class StockServiceApplication {
 			if (stockRepository.count() == 0) {
 				// Example product IDs 1 and 2 (adjust based on your actual product IDs)
 				stockRepository.saveAll(List.of(
-						new Stock(1, 100, "Main Warehouse - Shelf 1", StockStatus.AVAILABLE, "Product in good condition"),
-						new Stock(2, 0, "Main Warehouse - Shelf 2", StockStatus.OUT_OF_STOCK, "Product is out of stock")
+						new Stock(1, 10, 100, "Nabeul", StockStatus.AVAILABLE, "Product in good condition"),
+						new Stock(2, 5, 50, "Tunis", StockStatus.AVAILABLE, "Product is out of stock")
 				));
 			}
 
