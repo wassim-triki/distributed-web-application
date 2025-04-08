@@ -38,7 +38,6 @@ public class Order {
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
 
-    @Transient // Ne sera pas stocké en base, c’est juste calculé dynamiquement
     @Column(nullable = false)
     private BigDecimal totalAmount;
 

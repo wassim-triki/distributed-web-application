@@ -34,6 +34,8 @@ public class OrderService {
         // (Optionnel) Tu peux aussi stocker totalAmount dans un champ Order s'il est persisté
 
         // Étape 3 : Sauvegarder la commande
+        order.setTotalAmount(totalAmount);
+
         var savedOrder = repository.save(order);
         return savedOrder.getId();
     }
