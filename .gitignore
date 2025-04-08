@@ -8,3 +8,5 @@ EurekaApplication/.gitignore
 api-gateway/.gitignore
 
 customer-service/.gitignore
+
+notification-service/.gitignore

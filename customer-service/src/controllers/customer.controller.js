@@ -3,10 +3,12 @@ const Customer = require('../models/Customer');
 const jwt = require('jsonwebtoken');
 const sendEmail = require('../utils/sendEmail');
 const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
+const axios = require('axios');
+const apiGatewayUrl = process.env.API_GATEWAY_URL || 'http://localhost:8093';
 // @desc    Create a new customer
 // @route   POST /api/customers
 exports.createCustomer = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, address } = req.body;
+  const { firstName, lastName, email, address, phone } = req.body;
 
   const existing = await Customer.findOne({ email });
   if (existing) {
@@ -17,6 +19,7 @@ exports.createCustomer = asyncHandler(async (req, res) => {
   const customer = await Customer.create({
     firstName,
     lastName,
+    phone,
     email,
     address,
   });
@@ -96,7 +99,14 @@ exports.sendVerificationEmail = asyncHandler(async (req, res) => {
     <a href="${verifyLink}">${verifyLink}</a>
     <p>This link expires in 1 hour.</p>`;
 
-  await sendEmail(customer.email, 'Verify your email', html);
+  await axios.post(`${apiGatewayUrl}/notifications`, {
+    to: customer.email,
+    subject: 'Verify your email',
+    message: html,
+    type: 'email',
+  });
+
+  // await sendEmail(customer.email, 'Verify your email', html);
 
   res.json({ message: 'Verification email sent' });
 });
@@ -119,7 +129,12 @@ exports.verifyCustomer = asyncHandler(async (req, res) => {
 
     customer.isVerified = true;
     await customer.save();
-
+    await axios.post(`${apiGatewayUrl}/notifications`, {
+      to: customer.phone,
+      subject: 'Account verification',
+      message: 'Your account has been verified!',
+      type: 'sms',
+    });
     res.json({ message: 'Email verified successfully' });
   } catch (err) {
     res.status(400).json({ message: 'Invalid or expired token' });

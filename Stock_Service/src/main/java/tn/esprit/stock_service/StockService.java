@@ -1,6 +1,9 @@
 package tn.esprit.stock_service;
 
 
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,22 +12,52 @@ import java.util.List;
 public class StockService {
 
     private final StockRepository stockRepository;
+    private final JavaMailSender mailSender;
 
-    public StockService(StockRepository stockRepository) {
+    public StockService(StockRepository stockRepository,JavaMailSender mailSender) {
         this.stockRepository = stockRepository;
+        this.mailSender = mailSender;
+
     }
     public Stock addStock(Stock stock) {
-        return stockRepository.save(stock);
+        Stock savedStock = stockRepository.save(stock);
+        checkStockLevel(savedStock); // Vérification après ajout
+        return savedStock;
     }
 
     public Stock updateStock(int id, Stock stock) {
         if (stockRepository.existsById(id)) {
             stock.setId(id);
-            return stockRepository.save(stock);
+            Stock updatedStock = stockRepository.save(stock);
+            checkStockLevel(updatedStock); // Vérification après mise à jour
+            return updatedStock;
         }
         return null;
     }
 
+    private void checkStockLevel(Stock stock) {
+        if (stock.getQuantity() <= stock.getMinQuantity()) {
+            sendRestockNotification(stock);
+        }
+    }
+
+    private void sendRestockNotification(Stock stock) {
+        try {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setTo("khouloudbelhadj11@gmail.com");
+            helper.setSubject("Stock Low: Product " + stock.getProductId() + " needs restocking");
+            helper.setText(
+                    "Warning: The stock for product with ID " + stock.getProductId() + " has dropped to or below the minimum quantity ("
+                            + stock.getMinQuantity() + "). Currently, there are only " + stock.getQuantity() + " units remaining in stock. "
+                            + "Please restock the product as soon as possible to avoid stockouts."
+            );
+
+            mailSender.send(mimeMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void deleteStock(int id) {
         stockRepository.deleteById(id);
     }
