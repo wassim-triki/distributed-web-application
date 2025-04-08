@@ -95,5 +95,13 @@ public class StockService {
         return new StockStatisticsDTO(totalStockItems, totalQuantity, availableCount, outOfStockCount, reservedCount);
     }
 
+    public List<Stock> filterStock(StockStatus status, String location, Integer Quantity) {
+        return stockRepository.findAll().stream()
+                .filter(stock -> status == null || stock.getStatus() == status)
+                .filter(stock -> location == null || stock.getLocation().equalsIgnoreCase(location))
+                .filter(stock -> Quantity == null || stock.getQuantity() > 10)
+                .toList();
+    }
+
 
 }
