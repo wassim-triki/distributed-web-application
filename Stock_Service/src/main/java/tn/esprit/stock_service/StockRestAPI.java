@@ -18,24 +18,21 @@ public class StockRestAPI {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Object> createStock(@RequestBody Stock stock) {
-        try {
-            // Attempt to save the stock, which may throw an exception if minQuantity is invalid
-            Stock savedStock = stockService.saveStock(stock);
-            return ResponseEntity.ok(savedStock);  // Return the saved stock with a 200 OK status
-        } catch (IllegalArgumentException ex) {
-            // Return a bad request status (400) with the error message if validation fails
-            return ResponseEntity.badRequest().body(ex.getMessage());  // Return the error message from the exception
+    public ResponseEntity<Stock> createStock(@RequestBody Stock stock) {
+        Stock savedStock = stockService.addStock(stock);
+        return ResponseEntity.ok(savedStock);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Stock> updateStock(@PathVariable int id, @RequestBody Stock stock) {
+        Stock updatedStock = stockService.updateStock(id, stock);
+        if (updatedStock != null) {
+            return ResponseEntity.ok(updatedStock);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
-
-    @PutMapping("update/{id}")
-    public ResponseEntity<Stock> updateStock(@PathVariable int id, @RequestBody Stock stock) {
-        return ResponseEntity.ok(stockService.updateStock(id, stock));
-    }
-
-    //
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteStock(@PathVariable int id) {
         stockService.deleteStock(id);
@@ -71,4 +68,6 @@ public class StockRestAPI {
     public ResponseEntity<StockStatisticsDTO> getStatistics() {
         return ResponseEntity.ok(stockService.getStatistics());
     }
+
+
 }
