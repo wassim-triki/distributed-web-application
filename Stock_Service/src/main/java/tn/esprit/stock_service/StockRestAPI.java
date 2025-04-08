@@ -1,6 +1,9 @@
 package tn.esprit.stock_service;
 
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +16,14 @@ public class StockRestAPI {
 
     private final StockService stockService;
     private final StockPdfService pdfService;
+    private final StockExcelService excelService;
 
-    public StockRestAPI(StockService stockService,StockPdfService pdfService) {
+    public StockRestAPI(StockService stockService,
+                        StockPdfService pdfService,
+                        StockExcelService excelService) {
         this.stockService = stockService;
         this.pdfService = pdfService;
+        this.excelService = excelService;
 
     }
 
@@ -83,5 +90,16 @@ public class StockRestAPI {
                 .body(pdfBytes);
     }
 
+    @GetMapping("/excel")
+    public ResponseEntity<byte[]> exportExcel() {
+        List<Stock> stockList = stockService.getAllStock();
+        byte[] excelData = excelService.generateStockExcel(stockList);
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDispositionFormData("attachment", "stock_report.xlsx");
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+
+        return new ResponseEntity<>(excelData, headers, HttpStatus.OK);
+    }
+    
 }
