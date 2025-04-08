@@ -4,6 +4,7 @@ package tn.esprit.stock_service;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StockService {
@@ -14,6 +15,15 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
+    // Method to save a Stock entity after validation
+    public Stock saveStock(Stock stock) {
+        // Check if minQuantity is less than 1 and throw an exception if so
+        if (stock.getMinQuantity() < 1) {
+            throw new IllegalArgumentException("The minimum quantity cannot be less than 1.");
+        }
+        // If validation passes, save the stock entity to the database
+        return stockRepository.save(stock);
+    }
     public Stock addStock(Stock stock) {
         return stockRepository.save(stock);
     }
@@ -59,5 +69,12 @@ public StockStatisticsDTO getStatistics() {
 
     return new StockStatisticsDTO(totalStockItems, totalQuantity, availableCount, outOfStockCount, reservedCount);
 }
+
+    public List<Stock> getLowStockAlerts() {
+        return stockRepository.findByStatus(StockStatus.AVAILABLE)
+                .stream()
+                .filter(stock -> stock.getQuantity() <= stock.getMinQuantity())  // Comparer avec le minQuantity du produit
+                .collect(Collectors.toList());
+    }
 
 }
