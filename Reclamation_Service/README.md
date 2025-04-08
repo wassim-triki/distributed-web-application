@@ -1,3 +1,4 @@
+
 # 🛠️ **Reclamation Service**
 
 This microservice handles user **reclamations (complaints/feedback)** in a distributed microservice-based application. It supports adding, retrieving, and processing complaints, along with generating QR codes and PDF reports.
@@ -34,52 +35,63 @@ Before running the service, make sure you have the following installed:
 
    ```bash
    mvn clean package
-Build the Docker image:
+   ```
 
-bash
-Copy
-Edit
-docker build -t reclamation_service .
-Run the Docker container:
+2. **Build the Docker image:**
 
-bash
-Copy
-Edit
-docker run -p 8084:8084 --name reclamation_service reclamation_service
-Make sure port 8084 is available, or modify the port if necessary.
+   ```bash
+   docker build -t reclamation_service .
+   ```
 
-Accessing the Service
-Once the service is running, it will be available at:
-http://localhost:8084/
+3. **Run the Docker container:**
 
-Eureka Server & Config Server
-Ensure your Eureka Server is running at http://localhost:8761/ to allow the service to register.
+   ```bash
+   docker run -p 8084:8084 --name reclamation_service reclamation_service
+   ```
 
-The Spring Cloud Config Server should be running at http://localhost:8888/ to provide external configuration.
+Make sure port `8084` is available, or modify the port if necessary.
 
-🌐 Endpoints
-Method	Endpoint	Description
-GET	/reclamations/hello	Test endpoint to say "Hello" from the Reclamation Service.
-POST	/reclamations	Add a new reclamation (complaint).
-GET	/reclamations	Retrieve all reclamations.
-GET	/reclamations/{id}	Retrieve a specific reclamation by ID.
-PUT	/reclamations/{id}	Update an existing reclamation by ID.
-DELETE	/reclamations/{id}	Delete a reclamation by ID.
-GET	/reclamations/{id}/qr	Generate a QR code for a specific reclamation.
-GET	/reclamations/qr/{filename:.+}	Retrieve the QR code image for a reclamation.
-GET	/reclamations/pdf	Download all reclamations as a PDF document.
-QR Code Generation
-Each reclamation can generate a unique QR code that includes details such as the reclamation ID, description, order ID, status, and client email.
+### **Accessing the Service**
 
-The QR code can be accessed through the endpoint GET /reclamations/{id}/qr.
+Once the service is running, it will be available at:  
+`http://localhost:8084/`
 
-You can retrieve the generated QR code image by visiting GET /reclamations/qr/{filename}.
+### **Eureka Server & Config Server**
 
-⚙️ Configuration
-application.properties
-properties
-Copy
-Edit
+- Ensure your **Eureka Server** is running at `http://localhost:8761/` to allow the service to register.
+- The **Spring Cloud Config Server** should be running at `http://localhost:8888/` to provide external configuration.
+
+---
+
+## 🌐 **Endpoints**
+
+| Method  | Endpoint                           | Description                                                    |
+|---------|------------------------------------|----------------------------------------------------------------|
+| **GET** | `/reclamations/hello`              | Test endpoint to say "Hello" from the Reclamation Service.     |
+| **POST**| `/reclamations`                    | Add a new reclamation (complaint).                             |
+| **GET** | `/reclamations`                    | Retrieve all reclamations.                                     |
+| **GET** | `/reclamations/{id}`               | Retrieve a specific reclamation by ID.                         |
+| **PUT** | `/reclamations/{id}`               | Update an existing reclamation by ID.                          |
+| **DELETE**| `/reclamations/{id}`             | Delete a reclamation by ID.                                    |
+| **GET** | `/reclamations/{id}/qr`            | Generate a QR code for a specific reclamation.                 |
+| **GET** | `/reclamations/qr/{filename:.+}`   | Retrieve the QR code image for a reclamation.                  |
+| **GET** | `/reclamations/pdf`                | Download all reclamations as a PDF document.                   |
+
+---
+
+### **QR Code Generation**
+
+- Each reclamation can generate a unique QR code that includes details such as the reclamation ID, description, order ID, status, and client email.
+- The QR code can be accessed through the endpoint `GET /reclamations/{id}/qr`.
+- You can retrieve the generated QR code image by visiting `GET /reclamations/qr/{filename}`.
+
+---
+
+## ⚙️ **Configuration**
+
+### `application.properties`
+
+```properties
 # Reclamation Service Configuration
 
 # Application Name and Port
@@ -101,18 +113,22 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 # Spring Cloud Config
 spring.cloud.config.enabled=true
 spring.config.import=optional:configserver:http://localhost:8888
-Database Configuration
-The service uses an H2 database for development purposes. You can access the H2 database console at http://localhost:8084/h2 when the application is running.
+```
 
-Eureka & Config Server
-The application registers with Eureka for service discovery.
+### **Database Configuration**
 
-The Spring Cloud Config Server loads externalized configurations.
+- The service uses an **H2 database** for development purposes. You can access the H2 database console at `http://localhost:8084/h2` when the application is running.
 
-📁 Project Structure
-plaintext
-Copy
-Edit
+### **Eureka & Config Server**
+
+- The application registers with **Eureka** for service discovery.
+- The **Spring Cloud Config Server** loads externalized configurations.
+
+---
+
+## 📁 **Project Structure**
+
+```plaintext
 Reclamation_Service/
 ├── src/
 │   ├── main/java/
@@ -124,47 +140,39 @@ Reclamation_Service/
 ├── Dockerfile
 ├── pom.xml
 └── README.md  ← You are here
-🧪 Testing the Service
-You can test the basic functionality by using the following curl command:
-
-bash
-Copy
-Edit
-curl http://localhost:8084/reclamations/hello
-This should return a simple message like:
-"Hello from Reclamation Service!"
-
-🧑‍💻 Author
-Dridi Chaher – Intern at Banque de Tunisie
-
-GitHub: chahe-dridi
-
-This microservice is part of the distributed-web-application project.
-
-🚀 Contributing
-Feel free to fork this repository and submit issues or pull requests if you'd like to contribute.
-
-License
-Distributed under the MIT License. See LICENSE for more information.
-
-markdown
-Copy
-Edit
+```
 
 ---
 
-### Summary of Structure:
+## 🧪 **Testing the Service**
 
-1. **Project Title** with a brief introduction.
-2. **Technologies Used** section.
-3. **How to Run** section with prerequisites, Docker steps, and service access details.
-4. **Endpoints** section with details on how to interact with the service.
-5. **QR Code Generation** section explaining how QR codes are created for reclamations.
-6. **Configuration** section for `application.properties` and related services.
-7. **Database & Eureka** setup.
-8. **Project Structure** for easier navigation.
-9. **Testing** instructions for the service.
-10. **Author** section with GitHub details.
-11. **Contributing** and **License** sections.
+You can test the basic functionality by using the following `curl` command:
 
-This format will make your `README.md` file look clean and professional when viewed on GitHub.
+```bash
+curl http://localhost:8084/reclamations/hello
+```
+
+This should return a simple message like:  
+`"Hello from Reclamation Service!"`
+
+---
+
+## 🧑‍💻 **Author**
+
+**Dridi Chaher** – Intern at Banque de Tunisie
+
+- GitHub: [chahe-dridi](https://github.com/chahe-dridi)
+
+This microservice is part of the **distributed-web-application** project.
+
+---
+
+### 🚀 **Contributing**
+
+Feel free to fork this repository and submit issues or pull requests if you'd like to contribute.
+
+---
+
+### License
+
+Distributed under the MIT License. See `LICENSE` for more information.
