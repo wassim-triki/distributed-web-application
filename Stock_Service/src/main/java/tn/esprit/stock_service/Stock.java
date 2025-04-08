@@ -16,6 +16,9 @@ public class Stock implements Serializable {
 
     private int productId;  // Now storing product ID as a reference
 
+    @Column(nullable = false)
+    private int minQuantity = 1;  // Valeur par défaut de 1
+
     private int quantity;  // Current available quantity
 
     private String location;  // Storage location (e.g., "Main Warehouse - Shelf 3")
@@ -30,8 +33,9 @@ public class Stock implements Serializable {
 
     public Stock() {}
 
-    public Stock(int productId, int quantity, String location, StockStatus status, String notes) {
+    public Stock(int productId,int minQuantity, int quantity, String location, StockStatus status, String notes) {
         this.productId = productId;
+        this.minQuantity = minQuantity;
         this.quantity = quantity;
         this.location = location;
         this.status = status;
@@ -64,6 +68,14 @@ public class Stock implements Serializable {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    public int getMinQuantity() {
+        return minQuantity;
+    }
+
+    public void setMinQuantity(int minQuantity) {
+        this.minQuantity = minQuantity;
     }
 
     public int getQuantity() {
