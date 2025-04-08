@@ -6,6 +6,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.stereotype.Service;
 
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -91,5 +94,6 @@ public class StockService {
 
         return new StockStatisticsDTO(totalStockItems, totalQuantity, availableCount, outOfStockCount, reservedCount);
     }
+
 
 }

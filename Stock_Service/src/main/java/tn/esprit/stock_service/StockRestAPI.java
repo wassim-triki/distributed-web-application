@@ -12,9 +12,12 @@ import java.util.Optional;
 public class StockRestAPI {
 
     private final StockService stockService;
+    private final StockPdfService pdfService;
 
-    public StockRestAPI(StockService stockService) {
+    public StockRestAPI(StockService stockService,StockPdfService pdfService) {
         this.stockService = stockService;
+        this.pdfService = pdfService;
+
     }
 
     @PostMapping("/add")
@@ -67,6 +70,17 @@ public class StockRestAPI {
     @GetMapping("/statistics")
     public ResponseEntity<StockStatisticsDTO> getStatistics() {
         return ResponseEntity.ok(stockService.getStatistics());
+    }
+
+    @GetMapping("/pdf")
+    public ResponseEntity<byte[]> downloadStockPdf() {
+        List<Stock> stocks = stockService.getAllStock();
+        byte[] pdfBytes = pdfService.generateStockPdf(stocks);
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=stock-report.pdf")
+                .contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+                .body(pdfBytes);
     }
 
 
