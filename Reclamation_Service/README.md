@@ -2,6 +2,8 @@
 
 This microservice handles user **reclamations (complaints/feedback)** in a distributed microservice-based application. It supports adding, retrieving, and processing complaints, along with generating QR codes and PDF reports.
 
+---
+
 ## 📦 **Technologies Used**
 
 - **Java 17** – The primary programming language.
@@ -11,6 +13,8 @@ This microservice handles user **reclamations (complaints/feedback)** in a distr
 - **H2 Database** – In-memory database for development and testing.
 - **Docker** – For containerizing the microservice.
 - **QR Code Generation** – For generating unique QR codes for reclamations.
+
+---
 
 ## 🚀 **How to Run**
 
@@ -143,15 +147,24 @@ Feel free to fork this repository and submit issues or pull requests if you'd li
 License
 Distributed under the MIT License. See LICENSE for more information.
 
-yaml
+markdown
 Copy
 Edit
 
 ---
 
-### Changes Made:
-- Removed the "Run the project" section, keeping only the Docker-related instructions.
-- Updated the sections to keep the information clear and concise for users who want to quickly understand how to run the service.
-- Kept all essential details like the configuration, project structure, and endpoints.
+### Summary of Structure:
 
-This should now be ready for your GitHub repository!
+1. **Project Title** with a brief introduction.
+2. **Technologies Used** section.
+3. **How to Run** section with prerequisites, Docker steps, and service access details.
+4. **Endpoints** section with details on how to interact with the service.
+5. **QR Code Generation** section explaining how QR codes are created for reclamations.
+6. **Configuration** section for `application.properties` and related services.
+7. **Database & Eureka** setup.
+8. **Project Structure** for easier navigation.
+9. **Testing** instructions for the service.
+10. **Author** section with GitHub details.
+11. **Contributing** and **License** sections.
+
+This format will make your `README.md` file look clean and professional when viewed on GitHub.
