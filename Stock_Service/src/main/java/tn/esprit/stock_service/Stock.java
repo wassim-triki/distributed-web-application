@@ -17,7 +17,7 @@ public class Stock implements Serializable {
     private int productId;  // Now storing product ID as a reference
 
     @Column(nullable = false)
-    private int minQuantity = 1;  // Valeur par défaut de 1
+    private int minQuantity ;
 
     private int quantity;  // Current available quantity
 
