@@ -34,3 +34,5 @@ build/
 
 # Ignore Spring Boot config file with sensitive data
 src/main/resources/application.properties
+
+Database/
