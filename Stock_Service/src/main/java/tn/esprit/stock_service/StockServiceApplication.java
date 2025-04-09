@@ -30,8 +30,13 @@ public class StockServiceApplication {
 			if (stockRepository.count() == 0) {
 				// Example product IDs 1 and 2 (adjust based on your actual product IDs)
 				stockRepository.saveAll(List.of(
-						new Stock(1, 10, 100, "Nabeul", StockStatus.AVAILABLE, "Product in good condition"),
-						new Stock(2, 5, 50, "Tunis", StockStatus.AVAILABLE, "Product is out of stock")
+						new Stock(01, 10, 100, "Nabeul", StockStatus.AVAILABLE, "High-resolution screen"),
+						new Stock(02, 5, 50, "Tunis", StockStatus.AVAILABLE, "Auto-recharge"),
+						new Stock(03, 5, 20, "Bizerte", StockStatus.AVAILABLE, "Smartphone,128GB,Black"),
+						new Stock(04, 10, 150, "Béjà", StockStatus.RESERVED, "Laptop,Intel i7,16GB RAM"),
+						new Stock(05, 5, 80, "Tabarka", StockStatus.OUT_OF_STOCK, "Wireless Headphones"),
+						new Stock(05, 5, 90, "Zarzis", StockStatus.RESERVED, "Gaming Console,1TB HDD"),
+						new Stock(06, 10, 350, "Zaghouan", StockStatus.AVAILABLE, "4K LED TV,55-inch")
 				));
 			}
 

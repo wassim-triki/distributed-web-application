@@ -16,10 +16,13 @@ public class StockService {
 
     private final StockRepository stockRepository;
     private final JavaMailSender mailSender;
+    private final StockStatisticsPdfService stockStatisticsPdfService;
 
-    public StockService(StockRepository stockRepository,JavaMailSender mailSender) {
+    public StockService(StockRepository stockRepository,JavaMailSender mailSender,StockStatisticsPdfService stockStatisticsPdfService) {
         this.stockRepository = stockRepository;
         this.mailSender = mailSender;
+        this.stockStatisticsPdfService = stockStatisticsPdfService;
+
 
     }
     public Stock addStock(Stock stock) {
@@ -65,6 +68,10 @@ public class StockService {
         stockRepository.deleteById(id);
     }
 
+    public void deleteAllStocks() {
+        stockRepository.deleteAll();
+    }
+
     public List<Stock> getAllStock() {
         return stockRepository.findAll();
     }
@@ -103,5 +110,9 @@ public class StockService {
                 .toList();
     }
 
+    public byte[] generateStatisticsPdf() {
+        StockStatisticsDTO stats = getStatistics();
+        return stockStatisticsPdfService.generateAdvancedStockStatisticsPdf(stats);
+    }
 
 }

@@ -49,6 +49,10 @@ public class StockRestAPI {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/delete/all")
+    public void deleteAllStocks() {
+        stockService.deleteAllStocks();
+    }
 
     @GetMapping
     public ResponseEntity<List<Stock>> getAllStock() {
@@ -105,6 +109,16 @@ public class StockRestAPI {
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
         return new ResponseEntity<>(excelData, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/statistics/pdf")
+    public ResponseEntity<byte[]> downloadStatisticsPdf() {
+        byte[] pdfBytes = stockService.generateStatisticsPdf();
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=advanced-stock-statistics.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdfBytes);
     }
 
 }

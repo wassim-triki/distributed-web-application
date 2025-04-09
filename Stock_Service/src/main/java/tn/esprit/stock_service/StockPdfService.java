@@ -30,7 +30,7 @@ public class StockPdfService {
             PdfPTable table = new PdfPTable(6);
             table.setWidthPercentage(100);
             table.setSpacingBefore(10f);
-            table.setWidths(new float[]{1.2f, 1.2f, 1.2f, 1.5f, 2f, 3f}); // optional: column width
+            table.setWidths(new float[]{1.4f, 1.5f, 1.5f, 1.6f, 2.4f, 3.5f}); // optional: column width
 
             // Header style
             Font headerFont = new Font(Font.HELVETICA, 12, Font.BOLD, Color.WHITE);
@@ -74,7 +74,7 @@ public class StockPdfService {
         PdfPCell cell = new PdfPCell(new Phrase(content, font));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        cell.setPadding(6f);
+        cell.setPadding(6f);  // Reduced padding to fit text on one line
         table.addCell(cell);
     }
 }
