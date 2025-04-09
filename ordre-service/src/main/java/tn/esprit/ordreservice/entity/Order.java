@@ -41,6 +41,27 @@ public class Order {
     @Column(nullable = false)
     private BigDecimal totalAmount;
 
+    @Column
+    private BigDecimal discount = BigDecimal.ZERO; // 0 par défaut
+
+    @Column(name = "discounted")
+    private Boolean discounted = false; // Par défaut, false
+
+    @Column(name = "initial_amount")
+    private BigDecimal initialAmount;
+
+    @Column(name = "final_amount")
+    private BigDecimal finalAmount;
+
+
+
+
+    public BigDecimal getDiscountedAmount() {
+        BigDecimal total = getTotalAmount();
+        return total.subtract(total.multiply(discount));
+    }
+
+
     public BigDecimal getTotalAmount() {
         if (orderLines == null) return BigDecimal.ZERO;
 
@@ -115,4 +136,34 @@ public class Order {
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
+    public Boolean isDiscounted() {
+        return discounted;
+    }
+
+    public void setDiscounted(Boolean discounted) {
+        this.discounted = discounted != null ? discounted : false;
+    }
+
+    public BigDecimal getFinalAmount() {
+        return finalAmount;
+    }
+
+    public void setFinalAmount(BigDecimal finalAmount) {
+        this.finalAmount = finalAmount;
+    }
+
+    public BigDecimal getInitialAmount() {
+        return initialAmount;
+    }
+
+    public void setInitialAmount(BigDecimal initialAmount) {
+        this.initialAmount = initialAmount;
+    }
+
+
 }
