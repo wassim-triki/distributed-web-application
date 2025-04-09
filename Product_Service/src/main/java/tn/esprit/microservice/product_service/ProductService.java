@@ -1,12 +1,30 @@
 package tn.esprit.microservice.product_service;
 
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.WriterException;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -157,7 +175,42 @@ public class ProductService {
         logger.info("Searching products with keyword: {}", keyword);
         return productRepository.findByDescriptionContainingIgnoreCase(keyword);
     }
+    private static final String QR_CODE_FOLDER = "src/resources/QRCODES";
+    public String generateQRCodeForProduct(Product product) {
+        // Prepare QR code data: All product details
+        String productData = "Product ID: " + product.getId() + "\n" +
+                "Name: " + product.getName() + "\n" +
+                "Description: " + product.getDescription() + "\n" +  // Add other relevant fields
+                "Price: " + product.getPrice() + "\n" +
+                "Category: " + product.getCategory();
 
+        String fileName = QR_CODE_FOLDER + "/" + product.getName() + ".png"; // Save QR code with product name as file name
+        File directory = new File(QR_CODE_FOLDER);
+
+        // Ensure the directory exists
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        try {
+            // Generate the QR code
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            Map<EncodeHintType, String> hints = new HashMap<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+            BitMatrix bitMatrix = qrCodeWriter.encode(productData, BarcodeFormat.QR_CODE, 200, 200, hints);
+
+            // Convert BitMatrix to BufferedImage
+            BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+
+            // Save the image to file
+            File qrCodeFile = new File(fileName);
+            ImageIO.write(image, "PNG", qrCodeFile);
+
+            return fileName; // Return the path where the QR code was saved
+        } catch (WriterException | IOException e) {
+            throw new RuntimeException("Failed to generate QR code", e);
+        }
+    }
     // Internal DTO class for product statistics
     public static class ProductStatsDTO {
         private final long total;

@@ -31,9 +31,8 @@ public class ApiGatewayApplication {
 
                         // Deuxième route pour les lignes de commande
                         .route("ORDER-LINES", r -> r.path("/orders-line/**").uri("lb://ORDRE-SERVICE")) // The exact service name in Eureka
-
-
-
+                .route("product_service", r -> r.path("/products/**")
+                        .uri("lb://PRODUCT_SERVICE"))
 
                 .build();
     }
