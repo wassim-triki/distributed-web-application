@@ -1,0 +1,12 @@
+2025-04-04 11:30:51.817537+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "drop table if exists [*]order cascade "; attendu "identifier"
+Syntax error in SQL statement "drop table if exists [*]order cascade "; expected "identifier"; SQL statement:
+drop table if exists order cascade  [42001-232]
+2025-04-04 11:30:51.831536+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table [*]order (id integer not null, total_amount numeric(38,2), created_date timestamp(6) not null, last_modified_date timestamp(6), customer_id varchar(255), reference varchar(255) not null unique, payment_method enum ('BITCOIN','CREDIT_CARD','MASTER_CARD','PAYPAL','VISA'), primary key (id))"; attendu "identifier"
+Syntax error in SQL statement "create table [*]order (id integer not null, total_amount numeric(38,2), created_date timestamp(6) not null, last_modified_date timestamp(6), customer_id varchar(255), reference varchar(255) not null unique, payment_method enum ('BITCOIN','CREDIT_CARD','MASTER_CARD','PAYPAL','VISA'), primary key (id))"; expected "identifier"; SQL statement:
+create table order (id integer not null, total_amount numeric(38,2), created_date timestamp(6) not null, last_modified_date timestamp(6), customer_id varchar(255), reference varchar(255) not null unique, payment_method enum ('BITCOIN','CREDIT_CARD','MASTER_CARD','PAYPAL','VISA'), primary key (id)) [42001-232]
+2025-04-04 11:30:51.834539+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists order_line add constraint FKsag994hw7thnj0xefj4gl1wod foreign key (order_id) references [*]order"; attendu "identifier"
+Syntax error in SQL statement "alter table if exists order_line add constraint FKsag994hw7thnj0xefj4gl1wod foreign key (order_id) references [*]order"; expected "identifier"; SQL statement:
+alter table if exists order_line add constraint FKsag994hw7thnj0xefj4gl1wod foreign key (order_id) references order [42001-232]
