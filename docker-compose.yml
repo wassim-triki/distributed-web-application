@@ -1,40 +1,52 @@
-version: "3.9"
 services:
+  Eureka:
+    build: ./Eureka
+    image: gofraneab/mini-project-eureka-server:latest
+    container_name: eureka
+    ports:
+      - '8761:8761'
+    environment:
+      - spring.application.name=eureka
+      - server.port=8761
+      - eureka.client.register-with-eureka=false
+      - eureka.client.fetch-registry=false
 
+  api-gateway:
+    build: .\api-gateway
+    image: gofraneab/apigateway
+    container_name: apigateway
+    ports:
+      - '8093:8093' # Port mapping pour l'API Gateway
+    environment:
+      - spring.application.name=GATEWAY
+      - server.port=8093
+      - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
+    depends_on:
+      - Eureka
 
   Reclamation_Service:
     container_name: reclamation_service
     image: dark9040/reclamation_service
     build: .\reclamation_service
     ports:
-      - "8083:8083"
+      - '8083:8083'
     environment:
       - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
     depends_on:
       - Eureka
 
-
-
-
-  Eureka:
-    container_name: eureka
-    build: .\EurekaApplication
-    hostname: serviceregistry
+  order-service:
+    build: ./ordre-service
+    image: gofraneab/mini-project-microservice-order:latest
+    container_name: ordercontainer
     ports:
-      - "8761:8761"
-    image: dark9040/eureka
-    environment:
-      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
-
-
-
-  api-gateway:
-    build: .\api-gateway
-    image: dark9040/apigateway
-    ports:
-      - "8093:8093"  # Port mapping pour l'API Gateway
-    environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+      - '8082:8082'
     depends_on:
-      - "Eureka"
-      - "Reclamation_Service"
+      - Eureka
+    environment:
+      - spring.datasource.username=gofrane
+      - spring.datasource.password=
+      - spring.datasource.url=jdbc:h2:file:./Database/Data/orderDB
+      - spring.datasource.driver-class-name=org.h2.Driver
+      - spring.jpa.hibernate.ddl-auto=update
+      - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
