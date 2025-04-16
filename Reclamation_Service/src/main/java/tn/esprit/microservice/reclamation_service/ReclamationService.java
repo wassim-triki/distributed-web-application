@@ -147,7 +147,11 @@ public class   ReclamationService {
             helper.setText(
                     "<h3>Bonjour,</h3>" +
                             "<p>Nous avons bien reçu votre réclamation concernant: <strong>" + reclamation.getType() + "</strong>.</p>" +
+                            "<p>ID de la réclamation: " + reclamation.getId() + "</p>" +
                             "<p>Description: " + reclamation.getDescription() + "</p>" +
+                            "<p>Date de la réclamation: " + reclamation.getDateReclamation() + "</p>" +
+                            "<p>ID de la commande: " + reclamation.getOrderId() + "</p>" +
+                            "<p>Type de réclamation: " + reclamation.getType() + "</p>" +
                             "<p>Statut actuel: " + reclamation.getStatut() + "</p>" +
                             "<br><p>Merci pour votre retour.</p><p>Service Client</p>",
                     true // enable HTML
