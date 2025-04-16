@@ -63,14 +63,14 @@ public class ReclamationRestAPI {
     }
 
     // Endpoint to get all reclamations
-    // http://localhost:8083/reclamations
+    // http://localhost:8093/reclamations
     @GetMapping
     public ResponseEntity<List<Reclamation>> getAllReclamations() {
         return ResponseEntity.ok(reclamationService.getAllReclamations());
     }
 
     // Optional: endpoint to get reclamations by order ID
-    // http://localhost:8083/reclamations/1
+    // http://localhost:8093/reclamations/1
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Reclamation>> getReclamationById(@PathVariable int id) {
         return ResponseEntity.ok(reclamationService.getReclamationById(id));
@@ -83,21 +83,21 @@ public class ReclamationRestAPI {
     }
 
     // Optional: endpoint to get reclamations by type
-    // http://localhost:8083/reclamations/filter?type=ERREUR_COMMANDE
+    // http://localhost:8093/reclamations/filter?type=ERREUR_COMMANDE
     @GetMapping("/filter")
     public ResponseEntity<List<Reclamation>> getReclamationsByType(@RequestParam TypeReclamation type) {
         return ResponseEntity.ok(reclamationService.getReclamationsByType(type));
     }
 
     // Optional: endpoint to get reclamation statistics
-    // http://localhost:8083/reclamations/stats
+    // http://localhost:8093/reclamations/stats
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Object>> getReclamationStats() {
         return ResponseEntity.ok(reclamationService.getReclamationStats());
     }
 
     // Optional: endpoint to get monthly statistics
-    // http://localhost:8083/reclamations/stats/monthly
+        // http://localhost:8093/reclamations/stats/monthly
     @GetMapping("/stats/monthly")
     public ResponseEntity<Map<String, Long>> getMonthlyStats() {
         return ResponseEntity.ok(reclamationService.getMonthlyReclamationStats());
