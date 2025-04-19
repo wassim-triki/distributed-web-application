@@ -139,4 +139,20 @@ public class ProductRestAPI {
         logger.info("Searching products with keyword: {}", keyword);
         return ResponseEntity.ok(productService.searchByKeyword(keyword));
     }
+
+    // Generate QR code for a product
+    @GetMapping("/{id}/generate-qr")
+    public ResponseEntity<String> generateQRCode(@PathVariable int id) {
+        logger.info("Generating QR code for product with ID: {}", id);
+
+        Optional<Product> product = productService.getProductById(id);
+        if (product.isPresent()) {
+            String qrCodePath = productService.generateQRCodeForProduct(product.get());
+            return ResponseEntity.ok("QR code generated and saved at: " + qrCodePath);
+        } else {
+            logger.warn("Product not found with ID: {}", id);
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
