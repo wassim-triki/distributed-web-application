@@ -1,6 +1,6 @@
 services:
   Eureka:
-    build: ./Eureka
+    build: ./EurekaApplication
     image: gofraneab/mini-project-eureka-server:latest
     container_name: eureka
     ports:
@@ -24,16 +24,16 @@ services:
     depends_on:
       - Eureka
 
-  Reclamation_Service:
-    container_name: reclamation_service
-    image: dark9040/reclamation_service
-    build: .\reclamation_service
-    ports:
-      - '8083:8083'
-    environment:
-      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
-    depends_on:
-      - Eureka
+  # Reclamation_Service:
+  #   container_name: reclamation_service
+  #   image: dark9040/reclamation_service
+  #   build: ./reclamation_service
+  #   ports:
+  #     - '8083:8083'
+  #   environment:
+  #     - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
+  #   depends_on:
+  #     - Eureka
 
   order-service:
     build: ./ordre-service
@@ -51,11 +51,17 @@ services:
       - spring.jpa.hibernate.ddl-auto=update
       - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
 
-  keycloack:
+  keycloak:
     container_name: keycloak-service
     image: quay.io/keycloak/keycloak:23.0.0
     ports:
       - '9098:8080'
+    command:
+      - start-dev
+      # you can also pass flags here, for example:
+      # - --http-port=8080
+      # - --hostname-strict=false
     environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
+      # as of Keycloak 17+ these are the correct variables:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
