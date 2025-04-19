@@ -3,7 +3,7 @@ const { Eureka } = require('eureka-js-client');
 function registerWithEureka(PORT = 3001) {
   const eureka = new Eureka({
     instance: {
-      app: 'CUSTOMER-SERVICE',
+      app: 'CUSTOMER-SERVICE-NODE',
       instanceId: `customer-service-node:${PORT}`,
       hostName: 'localhost',
       ipAddr: '127.0.0.1',
@@ -12,7 +12,7 @@ function registerWithEureka(PORT = 3001) {
         $: PORT,
         '@enabled': true,
       },
-      vipAddress: 'customer-service',
+      vipAddress: 'customer-service-node',
       dataCenterInfo: {
         '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
         name: 'MyOwn',

@@ -12,7 +12,7 @@ services:
       - eureka.client.fetch-registry=false
 
   api-gateway:
-    build: .\api-gateway
+    build: ./api-gateway
     image: gofraneab/apigateway
     container_name: apigateway
     ports:
@@ -50,3 +50,12 @@ services:
       - spring.datasource.driver-class-name=org.h2.Driver
       - spring.jpa.hibernate.ddl-auto=update
       - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
+
+  keycloack:
+    container_name: keycloak-service
+    image: quay.io/keycloak/keycloak:23.0.0
+    ports:
+      - '9098:8080'
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
