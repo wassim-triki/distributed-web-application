@@ -1,0 +1,136 @@
+<!-- src/app/components/product-form/product-form.component.html -->
+<div class="container">
+    <h2>{{ isEditMode ? 'Edit' : 'Add' }} Product</h2>
+  
+    <!-- Loading State -->
+    <mat-spinner *ngIf="isLoading" diameter="40" aria-label="Loading product form"></mat-spinner>
+  
+    <!-- Error State -->
+    <div *ngIf="errorMessage" class="error-message" role="alert">
+      {{ errorMessage }}
+      <button mat-button color="warn" (click)="errorMessage = null">Dismiss</button>
+    </div>
+  
+    <!-- Form -->
+    <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" *ngIf="!isLoading">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.name"
+          name="name"
+          required
+          minlength="3"
+          #name="ngModel"
+          aria-label="Product name"
+        />
+        <mat-error *ngIf="name.invalid && name.touched">
+          Name is required and must be at least 3 characters.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.description"
+          name="description"
+          #description="ngModel"
+          aria-label="Product description"
+        />
+        <mat-error *ngIf="description.invalid && description.touched">
+          Description is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.price"
+          name="price"
+          type="number"
+          required
+          min="0"
+          #price="ngModel"
+          aria-label="Product price"
+        />
+        <mat-error *ngIf="price.invalid && price.touched">
+          Price is required and must be non-negative.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Stock Quantity</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.stockQuantity"
+          name="stockQuantity"
+          type="number"
+          required
+          min="0"
+          #stockQuantity="ngModel"
+          aria-label="Stock quantity"
+        />
+        <mat-error *ngIf="stockQuantity.invalid && stockQuantity.touched">
+          Stock quantity is required and must be non-negative.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select
+          [(ngModel)]="product.category"
+          name="category"
+          required
+          #category="ngModel"
+          aria-label="Product category"
+        >
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="category.invalid && category.touched">
+          Category is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Supplier Email</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.supplierEmail"
+          name="supplierEmail"
+          type="email"
+          required
+          email
+          #supplierEmail="ngModel"
+          aria-label="Supplier email"
+        />
+        <mat-error *ngIf="supplierEmail.invalid && supplierEmail.touched">
+          A valid email is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="form-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!productForm.valid || isLoading"
+          aria-label="Save product"
+        >
+          Save
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="cancel()"
+          aria-label="Cancel"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>

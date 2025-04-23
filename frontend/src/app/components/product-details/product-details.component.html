@@ -1,0 +1,46 @@
+<!-- src/app/components/product-details/product-details.component.html -->
+<div class="container">
+    <!-- Loading State -->
+    <mat-spinner *ngIf="isLoading" diameter="40" aria-label="Loading product details"></mat-spinner>
+  
+    <!-- Error State -->
+    <div *ngIf="errorMessage" class="error-message" role="alert">
+      {{ errorMessage }}
+      <button mat-button color="warn" (click)="retry()">Retry</button>
+    </div>
+  
+    <!-- Product Details -->
+    <div *ngIf="product && !isLoading && !errorMessage">
+      <h2>{{ product.name }}</h2>
+      <p><strong>Description:</strong> {{ product.description || 'No description available' }}</p>
+      <p><strong>Price:</strong> {{ product.price | currency }}</p>
+      <p><strong>Stock Quantity:</strong> {{ product.stockQuantity }}</p>
+      <p><strong>Category:</strong> {{ product.category }}</p>
+      <p><strong>Supplier Email:</strong> {{ product.supplierEmail }}</p>
+      <p><strong>Date Added:</strong> {{ product.dateAdded | date:'mediumDate' }}</p>
+      <div *ngIf="qrCodeUrl" class="qr-code">
+        <h3>QR Code</h3>
+        <img [src]="qrCodeUrl" alt="Product QR Code" />
+      </div>
+      <div class="actions">
+        <button
+          mat-raised-button
+          color="primary"
+          [routerLink]="['/product/edit', product.id]"
+          aria-label="Edit product"
+          matTooltip="Edit"
+        >
+          Edit
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          routerLink="/products"
+          aria-label="Back to products"
+          matTooltip="Back"
+        >
+          Back
+        </button>
+      </div>
+    </div>
+  </div>

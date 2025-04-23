@@ -12,6 +12,7 @@ import java.util.*;
 /**
  * REST controller for managing Product endpoints
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/products")
 public class ProductRestAPI {
