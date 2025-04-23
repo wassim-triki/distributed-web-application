@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>EurekaApplication</module>
         <module>api-gateway</module>
         <module>ordre-service</module>
         <module>Reclamation_Service</module>
