@@ -1,4 +1,37 @@
 services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-achat
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wassimtriki # root password
+      MYSQL_DATABASE: microservice-db # database name
+    ports:
+      - '3307:3306' # map ports (host:container)
+    volumes:
+      - mysql_data:/var/lib/mysql # persistent storage for data
+    command: --bind-address=0.0.0.0 # bind MySQL to all interfaces
+
+  eureka-server:
+    build:
+      context: ./EurekaApplication # Path to the Eureka application directory
+    container_name: eureka-server
+    ports:
+      - '8761:8761'
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  cart-service:
+    build:
+      context: ./cart-service # Path to the cart service directory
+    container_name: cart-service
+    ports:
+      - '8082:8082'
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysql
+      - eureka-server
   keycloak:
     container_name: keycloak-service
     image: quay.io/keycloak/keycloak:23.0.0
@@ -9,3 +42,7 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+
+# Define the volume at the bottom
+volumes:
+  mysql_data:
