@@ -23,3 +23,5 @@ Thumbs.db
 /api-gateway/.gitignore
 /customer-service/.gitignore
 /notification-service/.gitignore
+
+docker-compose.yml
