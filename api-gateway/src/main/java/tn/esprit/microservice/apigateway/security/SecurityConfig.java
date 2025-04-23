@@ -12,27 +12,16 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity serverHttpSecurity){
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange -> exchange
-                        .pathMatchers("(/eureka/**")
-                        .permitAll()
-                        .anyExchange()
+                        .pathMatchers("/eureka/**")  // Corrected path
+                        .permitAll()  // Allow public access to Eureka
+                        .anyExchange()  // All other paths require authentication
                         .authenticated())
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));  // Enable OAuth2 JWT support
+
         return serverHttpSecurity.build();
     }
-//    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) throws Exception {
-//        http
-//            .authorizeExchange()
-//                .pathMatchers("/reclamations/**").authenticated() // Adjusted path
-//                .pathMatchers("/stocks/**").authenticated() // Adjusted path
-//                .pathMatchers("/orders/**").authenticated() // Adjusted path
-//                .pathMatchers("/orders-line/**").authenticated() // Adjusted path
-//                .anyExchange().permitAll()
-//            .and()
-//            .csrf().disable()
-//        return http.build();
-//    }
 }
