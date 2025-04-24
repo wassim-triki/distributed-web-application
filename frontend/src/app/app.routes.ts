@@ -7,8 +7,10 @@ import { ListReclamationComponent } from './components/reclamation/list-reclamat
 import { AddReclamationComponent } from './components/reclamation/add-reclamation/add-reclamation.component';
 import { DetailReclamationComponent } from './components/reclamation/detail-reclamation/detail-reclamation.component';
 import { HomeComponent } from './components/home/home.component';
- 
-
+import { ListStockComponent } from './components/stock/list-stock/list-stock.component';
+import { AddStockComponent } from './components/stock/add-stock/add-stock.component';
+import { ModifyStockComponent } from './components/stock/modify-stock/modify-stock.component';
+import { ViewStockComponent } from './components/stock/view-stock/view-stock.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,7 +32,11 @@ export const routes: Routes = [
   { path: 'addreclamation', component: AddReclamationComponent },
 
 
-
+  //Stock
+  { path: 'stocks', component: ListStockComponent },
+  {path : 'add-stock', component: AddStockComponent},
+  {path : 'modify-stock/:id', component: ModifyStockComponent},
+  {path : 'view-stock/:id', component: ViewStockComponent},
 
 ];
 

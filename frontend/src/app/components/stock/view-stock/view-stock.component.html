@@ -1,0 +1,40 @@
+<div class="view-stock-container">
+    <div class="header">
+        <button class="back-btn" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i> 
+        </button>
+      <h2 class="stock-title">Stock Details</h2>
+    </div>
+  
+    <div *ngIf="isLoading" class="loading-spinner">
+      <p>Loading...</p>
+    </div>
+  
+    <div *ngIf="!isLoading && stock" class="stock-details">
+      <div class="stock-info">
+        <div class="info-item">
+          <strong>Product ID:</strong> {{ stock.productId }}
+        </div>
+        <div class="info-item">
+          <strong>Location:</strong> {{ stock.location }}
+        </div>
+        <div class="info-item">
+          <strong>Min Quantity:</strong> {{ stock.minQuantity }}
+        </div>
+        <div class="info-item">
+          <strong>Quantity:</strong> {{ stock.quantity }}
+        </div>
+        <div class="info-item">
+          <strong>Notes:</strong> <p>{{ stock.notes || 'No notes available' }}</p>
+        </div>
+        <div class="info-item">
+          <strong>Status:</strong> <span [ngClass]="getStatusClass(stock.status)">{{ stock.status }}</span>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLoading && !stock" class="no-stock-found">
+      <p>No stock information found.</p>
+    </div>
+  </div>
+  

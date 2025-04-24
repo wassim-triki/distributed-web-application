@@ -1,0 +1,59 @@
+<div class="list-stock-container">
+  <div class="header-container">
+    <h3>📦 Stock Management 📦</h3>
+    <div class="header-actions">
+      <!-- Search input -->
+      <input type="text" class="search-input" [(ngModel)]="searchQuery" (input)="applySearch()" placeholder="Search..." />
+
+      <!-- Add Stock Button -->
+      <button class="btn-success" (click)="addStock()">Add Stock</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <!-- Loading Spinner (optional) -->
+    <p>Loading...</p>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="Tableau">Product ID</th>
+        <th class="Tableau">📍  Location</th>
+        <th class="Tableau">📉 Min Qty</th>
+        <th class="Tableau">📦 Quantity</th>
+        <th class="Tableau">📊 Status</th>
+        <th class="Tableau">⚙️ Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stock of filteredStocks">
+        <td>{{ stock.productId }}</td>
+        <td>{{ stock.location || 'N/A' }}</td>
+        <td>{{ stock.minQuantity }}</td>
+        <td>{{ stock.quantity }}</td>
+        <td>{{ stock.status }}</td>
+        <td class="actions">
+          <!-- View Button -->
+          <button class="btn btn-info" (click)="viewStock(stock.id!)">
+            <i class="fa fa-eye"></i> View
+          </button>
+
+          <!-- Edit Button -->
+          <button class="btn btn-warning" (click)="editStock(stock.id!)">
+            <i class="fa fa-edit"></i> Edit
+          </button>
+
+          <!-- Delete Button -->
+          <button class="btn btn-danger" (click)="deleteStock(stock.id!)">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="filteredStocks.length === 0" class="no-stocks-message">
+    <p>No stocks found.</p>
+  </div>
+</div>

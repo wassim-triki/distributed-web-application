@@ -1,0 +1,118 @@
+/* Main container for the view stock page */
+.view-stock-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid #f1f1f1;
+  }
+  
+  /* Stock title */
+  .stock-title {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Loading spinner */
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    color: #28a745;
+  }
+  
+  /* Stock details container */
+  .stock-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Each stock info item */
+  .stock-info .info-item {
+    font-size: 1.1em;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  /* Status with dynamic class */
+  .stock-info .info-item .status {
+    font-weight: bold;
+  }
+  
+  /* Status classes based on stock status */
+  .stock-info .info-item span {
+    font-weight: bold;
+  }
+  
+  .stock-info .info-item span.AVAILABLE {
+    color: green;
+  }
+  
+  .stock-info .info-item span.OUT_OF_STOCK {
+    color: red;
+  }
+  
+  .stock-info .info-item span.RESERVED {
+    color: orange;
+  }
+  
+  /* "No stock found" message */
+  .no-stock-found {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .view-stock-container {
+      padding: 20px;
+    }
+  
+    .stock-title {
+      font-size: 1.8em;
+      text-align: center;
+    }
+  
+    .stock-info .info-item {
+      font-size: 1em;
+    }
+  }
+  
+  /* Header container *
+  
+  /* Back button styles */
+  .back-btn {
+    font-size: 1.2em;
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .back-btn i {
+    margin-right: 5px;
+  }
+  
+  .back-btn:hover {
+    color: #0056b3;
+  }
+  
+  /* Stock title styling */
+  .stock-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #333;
+  }
+  

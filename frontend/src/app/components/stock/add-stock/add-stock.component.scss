@@ -1,0 +1,146 @@
+/* Container for the Add Stock Form */
+.add-stock-form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid #f1f1f1;
+}
+
+/* Form Heading */
+.add-stock-form h3 {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Inputs */
+.add-stock-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.add-stock-form input,
+.add-stock-form select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1.1em;
+    box-sizing: border-box;
+}
+
+/* Focus State for Inputs */
+.add-stock-form input:focus,
+.add-stock-form select:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+/* Button Styling */
+.add-stock-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-stock-form button:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .add-stock-form {
+        padding: 20px;
+    }
+
+    .add-stock-form h3 {
+        font-size: 1.6em;
+    }
+
+    .add-stock-form input,
+    .add-stock-form select {
+        font-size: 1em;
+    }
+
+    .add-stock-form button {
+        font-size: 1em;
+    }
+}
+
+/* Placeholder Styling */
+.add-stock-form input::placeholder,
+.add-stock-form select::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Success Button Styling */
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Notes Textarea */
+.add-stock-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1.1em;
+    box-sizing: border-box;
+    resize: vertical;  /* Allow vertical resizing */
+}
+
+.add-stock-form textarea:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+/* Back button styles */
+.add-stock-form .back-btn {
+    font-size: 1.2em;
+    color: black;
+    background: none !important;  /* Ensure no green background is inherited */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px; /* Adjusted padding for the back button */
+    font-size: 1.1em;
+    border-radius: 4px;  /* Slightly rounded for the back button */
+}
+
+.add-stock-form .back-btn i {
+    margin-right: 5px;
+}
+
+.add-stock-form .back-btn:hover {
+    color: #0056b3;
+}
