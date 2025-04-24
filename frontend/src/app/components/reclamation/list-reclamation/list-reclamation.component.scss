@@ -1,0 +1,207 @@
+/* General Container Styles */
+.max-w-7xl {
+  max-width: 112rem; /* Sets the maximum width */
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.rounded-xl {
+  border-radius: 1rem;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+h2 {
+  text-align: center;
+  font-size: 2rem; /* Increased font size */
+  font-weight: 700; /* Bolder font */
+  color: #1a202c; /* Darker color for better contrast */
+  margin-bottom: 2rem; /* Increased spacing */
+  text-transform: uppercase; /* Added text transformation */
+  letter-spacing: 0.05em; /* Slight letter spacing */
+}
+
+/* Alerts Styling */
+.bg-blue-100 {
+  background-color: #ebf8ff;
+}
+
+.text-blue-800 {
+  color: #3182ce;
+}
+
+.bg-red-100 {
+  background-color: #fef2f2;
+}
+
+.text-red-800 {
+  color: #e53e3e;
+}
+
+.bg-yellow-100 {
+  background-color: #faf089;
+}
+
+.text-yellow-800 {
+  color: #b7791f;
+}
+
+/* Card Styles */
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.sm\:grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.gap-6 {
+  gap: 2rem; /* Increased gap for better spacing */
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+
+.rounded-lg {
+  border-radius: 0.75rem;
+}
+
+.shadow {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.hover\:shadow-lg:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhanced hover shadow */
+}
+
+.transition {
+  transition: all 0.3s ease;
+}
+
+.p-4 {
+  padding: 1.5rem; /* Increased padding for better spacing */
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Button Styling */
+button {
+  padding: 0.75rem 1.5rem; /* Increased padding for better click area */
+  font-size: 1rem; /* Increased font size */
+  border-radius: 0.5rem; /* Slightly larger border radius */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform transition */
+  font-weight: 600; /* Bolder font */
+}
+
+button:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.bg-blue-500 {
+  background-color: #3b82f6;
+}
+
+.hover\:bg-blue-600:hover {
+  background-color: #2563eb;
+}
+
+.text-white {
+  color: white;
+}
+
+.bg-red-500 {
+  background-color: #ef4444;
+}
+
+.hover\:bg-red-600:hover {
+  background-color: #dc2626;
+}
+
+/* Text Styles */
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+/* Footer Styles */
+.card-footer {
+  background-color: transparent;
+  border-top: 1px solid #f3f4f6;
+  padding: 1rem; /* Added padding for better spacing */
+  text-align: center; /* Centered footer content */
+  font-size: 0.875rem; /* Adjusted font size */
+  color: #6b7280; /* Subtle text color */
+}
+
+/* Added Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-in-out; /* Applied fade-in animation to cards */
+}
+
+/* Gradients for Buttons */
+.bg-blue-500 {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
+.bg-red-500 {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
