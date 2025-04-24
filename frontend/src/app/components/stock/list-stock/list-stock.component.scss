@@ -158,3 +158,31 @@
   .download-btn:hover {
     background-color: #0056b3;
   }
+
+  .statistics-container {
+    margin-top: 40px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+  
+  .stat-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .total-count {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    color: #555;
+  }
+  
+  .chart-wrapper {
+    margin-top: 30px;
+  }
+  
+  

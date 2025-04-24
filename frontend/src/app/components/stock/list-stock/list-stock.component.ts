@@ -4,11 +4,12 @@ import { Stock } from '../../../models/stock.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';  // Import FormsModule
-
+import { NgChartsModule } from 'ng2-charts';
+import { ChartConfiguration, ChartType } from 'chart.js';
 @Component({
   selector: 'app-list-stock',
   standalone: true,
-  imports: [CommonModule, FormsModule],  // Add necessary imports
+  imports: [CommonModule, FormsModule,NgChartsModule],  // Add necessary imports
   templateUrl: './list-stock.component.html',
   styleUrls: ['./list-stock.component.scss']
 })
@@ -33,7 +34,8 @@ export class ListStockComponent implements OnInit {
     this.stockService.getAll().subscribe({
       next: (data) => {
         this.stocks = data;
-        this.filteredStocks = [...this.stocks];  // Initialize filtered stocks
+        this.filteredStocks = [...this.stocks];
+        this.generateStatistics();
         this.loading = false;
       },
       error: (err) => {
@@ -42,6 +44,8 @@ export class ListStockComponent implements OnInit {
       }
     });
   }
+  
+  
 
   // Method to filter stocks based on search query
   applySearch(): void {
@@ -119,6 +123,54 @@ export class ListStockComponent implements OnInit {
       a.click();
       window.URL.revokeObjectURL(url);
     });
+  }
+  
+  barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
+    plugins: {
+      legend: { display: true, position: 'top' },
+      title: { display: true, text: '' }  // Titre sera dynamique
+    }
+  };
+  
+  barChartType: 'bar' = 'bar';
+  
+  chartConfigs: {
+    title: string;
+    data: ChartConfiguration<'bar'>['data'];
+  }[] = [];
+  
+  totalStockQuantity: number = 0;
+  
+  generateStatistics(): void {
+    const attributes: (keyof Stock)[] = ['status', 'location'];
+    this.totalStockQuantity = this.stocks.reduce((sum, s) => sum + s.quantity, 0);
+  
+    this.chartConfigs = attributes.map(attr => {
+      const statMap: { [key: string]: number } = {};
+  
+      this.stocks.forEach(stock => {
+        const key = String(stock[attr] ?? 'Undefined');
+        statMap[key] = (statMap[key] || 0) + stock.quantity;
+      });
+  
+      return {
+        title: `📊 Stock by ${attr.charAt(0).toUpperCase() + attr.slice(1)}`,
+        data: {
+          labels: Object.keys(statMap),
+          datasets: [{
+            data: Object.values(statMap),
+            label: 'Quantity',
+            backgroundColor: this.generateColors(Object.keys(statMap).length),
+          }]
+        }
+      };
+    });
+  }
+  
+  generateColors(count: number): string[] {
+    const baseColors = ['#4CAF50', '#FFC107', '#F44336', '#2196F3', '#9C27B0', '#00BCD4'];
+    return Array.from({ length: count }, (_, i) => baseColors[i % baseColors.length]);
   }
   
 }
