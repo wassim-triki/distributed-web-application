@@ -2,12 +2,13 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { KeycloakService } from '../app/services/keycloak.service';
 import { AsyncPipe } from '@angular/common';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from "./components/header/header.component"; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule ,RouterOutlet, AsyncPipe], // Add AsyncPipe
+  imports: [CommonModule, RouterOutlet, AsyncPipe, HeaderComponent], // Add AsyncPipe
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
