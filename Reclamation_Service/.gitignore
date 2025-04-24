@@ -32,11 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-# Ignore Spring Boot config file with sensitive data
-src/main/resources/static/
-
-**/application.properties
-
+ 
 Database/
 
-src/main/reources/static/
+ 

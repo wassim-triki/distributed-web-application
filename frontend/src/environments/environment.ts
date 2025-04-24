@@ -5,5 +5,6 @@ export const environment = {
     url: 'http://localhost:9098', // Keycloak server URL
     realm: 'micro-services', // Keycloak realm
     clientId: 'micro-services-angular', // Keycloak client ID
+ 
   },
 };

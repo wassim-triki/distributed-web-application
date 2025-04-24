@@ -32,11 +32,10 @@ export class ReclamationService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  getQrCodeFilename(id: number): Observable<string> {
-    // Directly return the URL of the QR code image
-    return this.http.get(`${this.apiUrl}/qr/${id}.png`, { responseType: 'text' });
-  }
-  
+ getQrCodeUrl(id: number): string {
+  return `${this.apiUrl}/qr/${id}.png`;
+}
+
    
 
 

@@ -42,10 +42,29 @@ public class ReclamationRestAPI {
 
     // Endpoint to create a reclamation
     // http://localhost:8083/reclamations
-    @PostMapping
+  /*  @PostMapping
     public ResponseEntity<Reclamation> createReclamation(@RequestBody Reclamation reclamation) {
         return ResponseEntity.ok(reclamationService.addReclamation(reclamation));
     }
+    */
+    @PostMapping
+    public ResponseEntity<Reclamation> createReclamation(@RequestBody Reclamation reclamation) {
+        Reclamation createdReclamation = reclamationService.addReclamation(reclamation);
+
+        try {
+            // Generate QR Code right after saving
+            qrCodeService.generateQRCodeForReclamation(createdReclamation.getId());
+        } catch (Exception e) {
+            // Optional: log the error, but don’t block the response
+            System.err.println("Failed to generate QR code: " + e.getMessage());
+        }
+
+        return ResponseEntity.ok(createdReclamation);
+    }
+
+
+
+
 
     // Endpoint to update a reclamation
     // http://localhost:8083/reclamations/1
