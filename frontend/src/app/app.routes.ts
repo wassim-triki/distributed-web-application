@@ -7,15 +7,17 @@ import { ListReclamationComponent } from './components/reclamation/list-reclamat
 import { AddReclamationComponent } from './components/reclamation/add-reclamation/add-reclamation.component';
 import { DetailReclamationComponent } from './components/reclamation/detail-reclamation/detail-reclamation.component';
 import { HomeComponent } from './components/home/home.component';
-
+ 
 
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  
+
 
   { path: 'products', component: ProductListComponent },
-  { path: 'product/add', component: ProductFormComponent },
+  { path: 'add', component: ProductFormComponent },
   { path: 'product/edit/:id', component: ProductFormComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   
