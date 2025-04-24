@@ -5,6 +5,7 @@ import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
 import { KeycloakService } from './app/services/keycloak.service';
 import { authInterceptor } from './app/interceptors/auth.interceptor';
+import { routes as appRoutes } from './app/app.routes'; // Import your application routes
 
 async function initializeApp() {
   const keycloakService = new KeycloakService();
@@ -13,16 +14,14 @@ async function initializeApp() {
     console.log('Keycloak initialization result:', authenticated);
   } catch (error) {
     console.error('Keycloak initialization failed:', error);
-    // Allow app to bootstrap with unauthenticated state
   }
 
-  // Merge appConfig with additional providers
   return {
     ...appConfig,
     providers: [
       ...(appConfig.providers || []),
       provideHttpClient(withInterceptors([authInterceptor])),
-      provideRouter([]), // Ensure router is provided if not in appConfig
+      provideRouter(appRoutes), // Use the correct routes here
       { provide: KeycloakService, useValue: keycloakService },
     ],
   };
