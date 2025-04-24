@@ -1,0 +1,64 @@
+/* Container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Heading Styles */
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .page-title span {
+    font-size: 2rem;
+    color: #4CAF50;  /* Green color for emphasis */
+  }
+  
+  /* Paragraph styling */
+  .lead-text {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    font-weight: 300;
+    text-align: center;
+  }
+  
+  /* Button styling */
+  .btn {
+    background-color: #FF6347;  /* Tomato Red for attention */
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn:hover {
+    background-color: #FF4500; /* Slightly darker red for hover */
+    transform: scale(1.05); /* Button scale effect on hover */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2.5rem;
+    }
+  
+    .lead-text {
+      font-size: 1rem;
+    }
+  
+    .btn {
+      font-size: 1rem;
+      padding: 10px 25px;
+    }
+  }
+  
