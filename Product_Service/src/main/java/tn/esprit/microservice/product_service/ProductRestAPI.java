@@ -146,14 +146,21 @@ public class ProductRestAPI {
     public ResponseEntity<String> generateQRCode(@PathVariable int id) {
         logger.info("Generating QR code for product with ID: {}", id);
 
+        // Fetch the product based on the ID
         Optional<Product> product = productService.getProductById(id);
         if (product.isPresent()) {
+            // Generate the QR code and get the relative path for the QR code image
             String qrCodePath = productService.generateQRCodeForProduct(product.get());
-            return ResponseEntity.ok("QR code generated and saved at: " + qrCodePath);
+
+            // Return the relative URL of the generated QR code that the frontend can use
+            String qrCodeUrl = "/qrcodes/" + qrCodePath.split("/")[qrCodePath.split("/").length - 1];  // Extract the filename from the path
+
+            return ResponseEntity.ok("QR code generated successfully. You can view it at: " + qrCodeUrl);
         } else {
             logger.warn("Product not found with ID: {}", id);
             return ResponseEntity.notFound().build();
         }
     }
+
 
 }

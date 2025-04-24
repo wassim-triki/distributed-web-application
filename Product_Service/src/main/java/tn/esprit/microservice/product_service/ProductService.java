@@ -174,8 +174,8 @@ public class ProductService {
 
         logger.info("Searching products with keyword: {}", keyword);
         return productRepository.findByDescriptionContainingIgnoreCase(keyword);
-    }
-    private static final String QR_CODE_FOLDER = "src/resources/QRCODES";
+    }private static final String QR_CODE_FOLDER = "F:/distributed-web-application/Product_Service/src/resources/QRCODES";
+
     public String generateQRCodeForProduct(Product product) {
         // Prepare QR code data: All product details
         String productData = "Product ID: " + product.getId() + "\n" +
@@ -184,13 +184,15 @@ public class ProductService {
                 "Price: " + product.getPrice() + "\n" +
                 "Category: " + product.getCategory();
 
-        String fileName = QR_CODE_FOLDER + "/" + product.getName() + ".png"; // Save QR code with product name as file name
-        File directory = new File(QR_CODE_FOLDER);
-
         // Ensure the directory exists
+        File directory = new File(QR_CODE_FOLDER);
         if (!directory.exists()) {
             directory.mkdirs();
         }
+
+        // Define the QR code file path
+        String fileName = product.getName() + ".png"; // Use the product name as the file name
+        File qrCodeFile = new File(QR_CODE_FOLDER, fileName);
 
         try {
             // Generate the QR code
@@ -203,14 +205,16 @@ public class ProductService {
             BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
 
             // Save the image to file
-            File qrCodeFile = new File(fileName);
             ImageIO.write(image, "PNG", qrCodeFile);
 
-            return fileName; // Return the path where the QR code was saved
+            // Return the relative URL to the frontend
+            return "/qrcodes/" + fileName; // The URL that the frontend will access
         } catch (WriterException | IOException e) {
             throw new RuntimeException("Failed to generate QR code", e);
         }
-    }
+
+
+}
     // Internal DTO class for product statistics
     public static class ProductStatsDTO {
         private final long total;
