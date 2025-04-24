@@ -88,4 +88,37 @@ export class ListStockComponent implements OnInit {
   viewStock(id: number): void {
     this.router.navigate(['/view-stock', id]);
   }
+
+  downloadPdf() {
+    this.stockService.downloadStockPdf().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'stock.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
+  
+  downloadExcel() {
+    this.stockService.downloadStockExcel().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'stock.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
+  downloadStatisticsPdf() {
+    this.stockService.downloadStatisticsPdf().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'stock-statistics.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
+  
 }
