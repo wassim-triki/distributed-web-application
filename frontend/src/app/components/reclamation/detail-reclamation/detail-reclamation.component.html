@@ -1,19 +1,21 @@
 <div class="container">
   <!-- Loading and Error Alerts -->
-  <div *ngIf="isLoading" class="alert alert-loading">
-    Chargement...
+  <div *ngIf="isLoading" class="alert alert-loading card">
+    <h3>Chargement...</h3>
   </div>
-  <div *ngIf="error" class="alert alert-error">
-    {{ error }}
+  <div *ngIf="error" class="alert alert-error card">
+    <h3>Erreur</h3>
+    <p>{{ error }}</p>
   </div>
-  <div *ngIf="success" class="alert alert-success">
-    {{ success }}
+  <div *ngIf="success" class="alert alert-success card">
+    <h3>Succès</h3>
+    <p>{{ success }}</p>
   </div>
 
   <!-- Form to Update Reclamation -->
-  <div *ngIf="!isLoading && reclamation" class="form-container">
-    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Modifier la Réclamation</h2>
-    <form (ngSubmit)="updateReclamation()" #reclamationForm="ngForm">
+  <div *ngIf="!isLoading && reclamation" class="form-container card">
+    <h3 class="form-title">Modifier la Réclamation</h3>
+    <form (ngSubmit)="updateReclamation()" #reclamationForm="ngForm" novalidate>
       <!-- Description Field -->
       <div class="form-group">
         <label for="description" class="label">Description :</label>
@@ -22,6 +24,8 @@
           [(ngModel)]="reclamation.description"
           name="description"
           class="form-control"
+          placeholder="Décrivez votre réclamation ici..."
+          rows="4"
           required
         ></textarea>
       </div>
@@ -36,11 +40,12 @@
           class="form-control"
           required
         >
-          <option value="PRODUIT_ENDOMMAGE">PRODUIT_ENDOMMAGE</option>
-          <option value="RETARD_LIVRAISON">RETARD_LIVRAISON</option>
-          <option value="ERREUR_COMMANDE">ERREUR_COMMANDE</option>
-          <option value="SERVICE_CLIENT">SERVICE_CLIENT</option>
-          <option value="AUTRE">AUTRE</option>
+          <option value="" disabled selected>Choisissez un type</option>
+          <option value="PRODUIT_ENDOMMAGE">Produit Endommagé</option>
+          <option value="RETARD_LIVRAISON">Retard de Livraison</option>
+          <option value="ERREUR_COMMANDE">Erreur de Commande</option>
+          <option value="SERVICE_CLIENT">Service Client</option>
+          <option value="AUTRE">Autre</option>
         </select>
       </div>
 
@@ -53,16 +58,17 @@
           [(ngModel)]="reclamation.emailClient"
           name="emailClient"
           class="form-control"
+          placeholder="Entrez l'email du client"
           required
         />
       </div>
 
       <!-- Button Container -->
       <div class="button-container">
-        <button type="submit" class="button button-update">
+        <button type="submit" class="button button-primary">
           Mettre à jour
         </button>
-        <button type="button" class="button button-back" (click)="goBack()">
+        <button type="button" class="button button-secondary" (click)="goBack()">
           Retour
         </button>
       </div>

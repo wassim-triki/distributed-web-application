@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router'; // Needed for routerLink to work in the template
-import { NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, NgIf],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
