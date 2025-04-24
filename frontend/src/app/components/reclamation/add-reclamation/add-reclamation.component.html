@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="card-body">
+    <h2>Ajouter une réclamation</h2>
+
+    <form (ngSubmit)="saveReclamation()" #reclamationForm="ngForm" novalidate>
+      <div class="form-group mb-3">
+        <label for="description">Description :</label>
+        <textarea
+          id="description"
+          [(ngModel)]="reclamation.description"
+          name="description"
+          required
+          #description="ngModel"
+          class="form-control"
+        ></textarea>
+        <div *ngIf="description.invalid && description.touched" class="text-danger">
+          La description est requise.
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="orderId">ID de la commande :</label>
+        <input
+          type="number"
+          id="orderId"
+          [(ngModel)]="reclamation.orderId"
+          name="orderId"
+          required
+          #orderId="ngModel"
+          class="form-control"
+        />
+        <div *ngIf="orderId.invalid && orderId.touched" class="text-danger">
+          L'ID de la commande est requis.
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="type">Type de réclamation :</label>
+        <select
+          id="type"
+          [(ngModel)]="reclamation.type"
+          name="type"
+          required
+          #type="ngModel"
+          class="form-control"
+        >
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+        <div *ngIf="type.invalid && type.touched" class="text-danger">
+          Le type de réclamation est requis.
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="emailClient">Email du client :</label>
+        <input
+          type="email"
+          id="emailClient"
+          [(ngModel)]="reclamation.emailClient"
+          name="emailClient"
+          required
+          #emailClient="ngModel"
+          class="form-control"
+        />
+        <div *ngIf="emailClient.invalid && emailClient.touched" class="text-danger">
+          Un email valide est requis.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="reclamationForm.invalid">
+        Ajouter la réclamation
+      </button>
+    </form>
+  </div>
+</div>
