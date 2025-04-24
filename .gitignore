@@ -1,12 +1,27 @@
-# Ignore Reclamation Service's specific .gitignore
+# Ignore all node_modules directories
+**/node_modules/
+
+# Ignore IDE configurations
+.idea/
+.vscode/
+
+# Ignore logs
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore all generated files
+*.class
+*.war
+*.jar
+
+# Ignore any specific files related to certain services
 /reclamation_service/.gitignore
+/EurekaApplication/.gitignore
+/api-gateway/.gitignore
+/customer-service/.gitignore
+/notification-service/.gitignore
 
-# Ignore EurekaApplication Service's specific .gitignore
-EurekaApplication/.gitignore
-
-# Ignore api-gateway Service's specific .gitignore
-api-gateway/.gitignore
-
-customer-service/.gitignore
-
-notification-service/.gitignore
+docker-compose.yml

@@ -1,0 +1,16 @@
+
+<app-header></app-header>
+
+<router-outlet> </router-outlet>
+
+<!-- Use the public observable with async pipe -->
+<div *ngIf="isAuthenticated$ | async; else loginPrompt">
+  User is authenticated
+</div>
+
+<ng-template #loginPrompt>
+  <div>Please log in</div>
+
+
+
+</ng-template>

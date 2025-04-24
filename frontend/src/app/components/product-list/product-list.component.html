@@ -1,0 +1,112 @@
+<!-- src/app/components/product-list/product-list.component.html -->
+<div class="container">
+    <h2>Products</h2>
+  
+    <!-- Search and Filter -->
+    <div class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Search by description</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchKeyword"
+          (ngModelChange)="searchProducts()"
+          placeholder="Search by description"
+          aria-label="Search products by description"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select
+          [(ngModel)]="selectedCategory"
+          (ngModelChange)="filterByCategory()"
+          aria-label="Filter by category"
+        >
+          <mat-option [value]="null">All Categories</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" routerLink="/product/add">
+        Add Product
+      </button>
+    </div>
+  
+    <!-- Loading and Error States -->
+    <mat-spinner *ngIf="isLoading" diameter="40" aria-label="Loading products"></mat-spinner>
+    <div *ngIf="errorMessage" class="error-message" role="alert">
+      {{ errorMessage }}
+      <button mat-button color="warn" (click)="retry()">Retry</button>
+    </div>
+  
+    <!-- Product Table -->
+    <mat-table [dataSource]="products" *ngIf="!isLoading && !errorMessage">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+        <mat-cell *matCellDef="let product">{{ product.price | currency }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+        <mat-cell *matCellDef="let product">{{ product.category }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let product">
+          <button
+            mat-icon-button
+            [routerLink]="['/product', product.id]"
+            aria-label="View product details"
+            matTooltip="View"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            [routerLink]="['/product/edit', product.id]"
+            aria-label="Edit product"
+            matTooltip="Edit"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="deleteProduct(product.id)"
+            aria-label="Delete product"
+            matTooltip="Delete"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="generateQRCode(product.id)"
+            aria-label="Generate QR code"
+            matTooltip="Generate QR Code"
+          >
+            <mat-icon>qr_code</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  
+    <!-- QR Code Display -->
+    <div *ngIf="qrCodeUrl" class="qr-code">
+      <h3>Generated QR Code</h3>
+      <img [src]="qrCodeUrl" alt="Product QR Code" />
+      <button mat-button color="primary" (click)="qrCodeUrl = null">Close</button>
+    </div>
+  
+    <!-- Stats -->
+    <div class="stats" *ngIf="stats && !isLoading && !errorMessage">
+      <h3>Stats</h3>
+      <p>Total Products: {{ stats.total }}</p>
+      <p *ngFor="let item of stats.byCategory | keyvalue">
+        {{ item.key }}: {{ item.value }}
+      </p>
+    </div>
+  </div>
