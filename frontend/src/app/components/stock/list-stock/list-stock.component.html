@@ -1,0 +1,29 @@
+<div *ngIf="loading">Chargement des stocks...</div>
+
+<table *ngIf="!loading" class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Produit ID</th>
+      <th>Quantité Min</th>
+      <th>Quantité</th>
+      <th>Statut</th>
+      <th>Emplacement</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stock of stocks">
+      <td>{{ stock.id }}</td>
+      <td>{{ stock.productId }}</td>
+      <td>{{ stock.minQuantity }}</td>
+      <td>{{ stock.quantity }}</td>
+      <td>{{ stock.status }}</td>
+      <td>{{ stock.location }}</td>
+      <td>
+        <button (click)="editStock(stock.id)">Éditer</button>
+        <button (click)="deleteStock(stock.id)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
