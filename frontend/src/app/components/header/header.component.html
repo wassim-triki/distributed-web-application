@@ -1,7 +1,10 @@
-<ul class="menu menu-horizontal px-1">
-    <li><a routerLink="/home" routerLinkActive="active">Accueil</a></li>
-    <li><a routerLink="/listreclamation" routerLinkActive="active">Réclamations</a></li>
-      
-    <li><a routerLink="/products" routerLinkActive="active">Produits</a></li>  
-  </ul>
-  
+<header class="header bg-gray-800 text-white py-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="logo text-2xl font-bold">🛒 EcomStore</h1>
+    <nav class="flex space-x-4">
+      <a routerLink="/home" routerLinkActive="active" class="hover:text-yellow-400">Home</a>
+      <a routerLink="/listreclamation" routerLinkActive="active" class="hover:text-yellow-400">My reclamations</a>
+      <a routerLink="/products" routerLinkActive="active" class="hover:text-yellow-400">product</a>
+      </nav>
+  </div>
+</header>

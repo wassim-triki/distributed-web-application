@@ -1,76 +1,137 @@
-/* Container */
+/* Container Styling */
 .container {
-    @apply max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-md;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f9; /* Light background color */
+}
+
+/* Card Styling for All Alerts and Form */
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+  text-align: left; /* Align text to the left */
+}
+
+/* Title Styling */
+.card h3 {
+  color: #00796b;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+/* Paragraph Styling */
+.card p {
+  color: #444444;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Form Styling */
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 1.1rem;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input and Textarea Styling */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #555;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #00796b;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 128, 128, 0.3);
+}
+
+/* Button Styling */
+.button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  width: 48%; /* Make buttons appear in line */
+}
+
+.button-primary {
+  background-color: #00796b;
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: #004d40;
+}
+
+.button-secondary {
+  background-color: #eeeeee;
+  color: #00796b;
+  margin-left: 4%; /* Add slight space between buttons */
+}
+
+.button-secondary:hover {
+  background-color: #cccccc;
+}
+
+/* Alert Styles */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.alert-loading {
+  background-color: #ffeb3b;
+  color: #795548;
+}
+
+.alert-error {
+  background-color: #f44336;
+  color: white;
+}
+
+.alert-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    padding: 15px;
   }
-  
-  /* Header */
-  h2 {
-    @apply text-3xl font-bold text-gray-900 text-center mb-8;
-  }
-  
-  /* Form Group */
-  .form-group {
-    @apply mb-6;
-  }
-  
-  .form-group label {
-    @apply block text-sm font-medium text-gray-700 mb-2;
-  }
-  
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    @apply w-full p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all;
-  }
-  
-  /* Textarea */
-  textarea {
-    @apply resize-none;
-    min-height: 120px;
-  }
-  
-  /* Button Container */
-  .button-container {
-    @apply flex justify-between mt-8;
-  }
-  
-  /* Button Styles */
+
   .button {
-    @apply py-3 px-6 rounded-md text-white font-semibold focus:outline-none transition-colors duration-300 ease-in-out;
+    width: 100%;
+    margin: 10px 0;
   }
-  
-  /* Update Button */
-  .button-update {
-    @apply bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500;
-  }
-  
-  /* Back Button */
-  .button-back {
-    @apply bg-gray-600 hover:bg-gray-700 focus:ring-2 focus:ring-gray-500;
-  }
-  
-  /* Alerts */
-  .alert {
-    @apply px-6 py-4 mb-4 text-sm font-medium rounded-lg;
-  }
-  
-  /* Success Alert */
-  .alert-success {
-    @apply bg-green-100 text-green-800;
-  }
-  
-  /* Error Alert */
-  .alert-error {
-    @apply bg-red-100 text-red-800;
-  }
-  
-  /* Loading Alert */
-  .alert-loading {
-    @apply bg-blue-100 text-blue-800;
-  }
-  
-  /* Flex container for button and form */
-  .form-container {
-    @apply flex flex-col space-y-6;
-  }
-  
+}
