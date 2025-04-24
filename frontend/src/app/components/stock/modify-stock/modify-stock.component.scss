@@ -1,0 +1,143 @@
+/* Container for the Modify Stock Form */
+.modify-stock-form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid #f1f1f1;
+}
+
+/* Form Heading */
+.modify-stock-form h3 {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Inputs */
+.modify-stock-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.modify-stock-form input,
+.modify-stock-form select,
+.modify-stock-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1.1em;
+    box-sizing: border-box;
+}
+
+/* Focus State for Inputs */
+.modify-stock-form input:focus,
+.modify-stock-form select:focus,
+.modify-stock-form textarea:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+/* Button Styling */
+.modify-stock-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modify-stock-form button:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .modify-stock-form {
+        padding: 20px;
+    }
+
+    .modify-stock-form h3 {
+        font-size: 1.6em;
+    }
+
+    .modify-stock-form input,
+    .modify-stock-form select,
+    .modify-stock-form button {
+        font-size: 1em;
+    }
+}
+
+/* Notes Textarea */
+.modify-stock-form textarea {
+    resize: vertical;  /* Allow vertical resizing */
+}
+
+/* Success Button Styling */
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Back button styles */
+.modify-stock-form .back-btn {
+    font-size: 1.2em;
+    color: black;
+    background: none !important;  /* Ensure no green background is inherited */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px; /* Adjusted padding for the back button */
+    font-size: 1.1em;
+    border-radius: 4px;  /* Slightly rounded for the back button */
+}
+
+.modify-stock-form .back-btn i {
+    margin-right: 5px;
+}
+
+.modify-stock-form .back-btn:hover {
+    color: #0056b3;
+}
+
+/* Prevent the 'Back' button from inheriting styles from other buttons */
+.modify-stock-form button:not(.back-btn) {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modify-stock-form button:not(.back-btn):hover {
+    background-color: #218838;
+}

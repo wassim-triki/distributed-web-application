@@ -1,1 +1,32 @@
-<p>add-stock works!</p>
+<div class="add-stock-form">
+    <button class="back-btn" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> 
+    </button>
+    <h3>Add New Stock</h3>
+    <form (ngSubmit)="addStock()">
+      <label for="productId">Product ID</label>
+      <input id="productId" [(ngModel)]="stock.productId" name="productId" type="number" required />
+      
+      <label for="location">Location</label>
+      <input id="location" [(ngModel)]="stock.location" name="location" type="text" required />
+      
+      <label for="minQuantity">Min Quantity</label>
+      <input id="minQuantity" [(ngModel)]="stock.minQuantity" name="minQuantity" type="number" required />
+      
+      <label for="quantity">Quantity</label>
+      <input id="quantity" [(ngModel)]="stock.quantity" name="quantity" type="number" required />
+      
+      <label for="notes">Notes</label>
+      <textarea id="notes" [(ngModel)]="stock.notes" name="notes" rows="4" placeholder="Enter any notes or remarks"></textarea>
+
+      <label for="status">Status</label>
+      <select id="status" [(ngModel)]="stock.status" name="status" required>
+        <option value="AVAILABLE">AVAILABLE</option>
+        <option value="OUT_OF_STOCK">OUT_OF_STOCK</option>
+        <option value="RESERVED">RESERVED</option>
+      </select>      
+      
+      <button type="submit" class="btn-success">Add Stock</button>
+    </form>
+  </div>
+  
