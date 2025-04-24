@@ -1,10 +1,12 @@
 <div class="max-w-7xl mx-auto p-6 bg-white rounded-xl shadow-md">
   <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6 uppercase tracking-wide">
-    Liste des Réclamations
+    My Reclamations
   </h2>
 
   <div class="flex justify-end mb-4">
-    <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 text-sm rounded transform hover:scale-105 transition"  (click)="addReclamation()">
+    <button 
+      class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 text-sm rounded transform hover:scale-105 transition shadow-md"
+      (click)="addReclamation()">
       Ajouter Réclamation
     </button>
   </div>
@@ -16,30 +18,29 @@
     {{ error }}
   </div>
 
-  <div *ngIf="!isLoading && reclamations.length > 0" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+  <div *ngIf="!isLoading && reclamations.length > 0" class="card-container">
     <div
       *ngFor="let r of reclamations"
-      class="bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col justify-between card"
+      class="card"
     >
       <div>
-        <h5 class="text-lg font-bold text-blue-600 mb-2">Réclamation #{{ r.id }}</h5>
-        <p class="text-sm text-gray-600"><strong>Date :</strong> {{ r.dateReclamation | date: 'short' }}</p>
-        <p class="text-sm text-gray-600 mt-1"><strong>Description :</strong> {{ r.description }}</p>
-        <p class="text-sm text-gray-600 mt-1"><strong>Type :</strong> {{ r.type }}</p>
-        <p class="text-sm text-gray-600 mt-1"><strong>Email :</strong> {{ r.emailClient }}</p>
+        <h3>Réclamation #{{ r.id }}</h3>
+        <p><strong>Date :</strong> {{ r.dateReclamation | date: 'short' }}</p>
+        <p><strong>Description :</strong> {{ r.description }}</p>
+        <p><strong>Type :</strong> {{ r.type }}</p>
+        <p><strong>Email :</strong> {{ r.emailClient }}</p>
+        <p><strong>Statut :</strong> {{ r.statut }}</p>
+        <p><strong>Commande ID :</strong> {{ r.orderId }}</p>
+        
+        
       </div>
-      <div class="mt-4 flex justify-between">
-        <button
-          class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 text-sm rounded transform hover:scale-105 transition"
-          (click)="goToDetail(r.id!)"
-        >
-          Voir
+      
+      <div class="mt-4">
+        <button (click)="goToDetail(r.id!)">
+          Update
         </button>
-        <button
-          class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 text-sm rounded transform hover:scale-105 transition"
-          (click)="deleteReclamation(r.id!)"
-        >
-          Supprimer
+        <button (click)="deleteReclamation(r.id!)">
+          Delete
         </button>
       </div>
     </div>

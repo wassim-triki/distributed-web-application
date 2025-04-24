@@ -57,4 +57,18 @@ export class ListReclamationComponent implements OnInit {
       });
     }
   }
+
+  getQrCodeFilename(id: number): void {
+    this.reclamationService.getQrCodeFilename(id).subscribe({
+      next: (filename) => {
+        console.log(`QR Code filename: ${filename}`);
+      },
+      error: () => {
+        this.error = 'Erreur lors de la récupération du nom du fichier QR Code.';
+      }
+    });
+  }
+   
+
+  
 }
