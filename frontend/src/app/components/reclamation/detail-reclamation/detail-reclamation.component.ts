@@ -44,7 +44,7 @@ export class DetailReclamationComponent implements OnInit {
       this.isLoading = false;
     }
   }
-
+/*
   updateReclamation(): void {
     if (this.reclamation && typeof this.reclamation.id === 'number') {
       this.reclamationService.updateReclamation(this.reclamation.id, this.reclamation).subscribe({
@@ -58,8 +58,23 @@ export class DetailReclamationComponent implements OnInit {
     } else {
       this.error = 'ID de réclamation invalide pour la mise à jour.';
     }
-  }
+  }*/
+    updateReclamation() {
+      this.isLoading = true;
+      this.error = '';
+      this.success = '';
   
+      // Simulate an update call, replace with your actual update logic
+      setTimeout(() => {
+        this.isLoading = false;
+        this.success = 'Réclamation mise à jour avec succès!';
+        
+        // Redirect to the list of reclamations after a successful update
+        setTimeout(() => {
+          this.router.navigate(['/listreclamation']);
+        }, 2000); // Wait 2 seconds to show the success message before redirecting
+      }, 1000); // Simulate an update request
+    }
   
 
   goBack(): void {
