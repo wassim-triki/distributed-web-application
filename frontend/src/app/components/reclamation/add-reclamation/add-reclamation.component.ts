@@ -48,4 +48,9 @@ export class AddReclamationComponent {
       }
     });
   }
+
+
+
+
+  
 }

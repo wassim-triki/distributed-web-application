@@ -32,6 +32,14 @@
         <p><strong>Statut :</strong> {{ r.statut }}</p>
         <p><strong>Commande ID :</strong> {{ r.orderId }}</p>
         
+        <div *ngIf="selectedReclamationId === r.id && selectedQrCodeUrl" class="mt-2">
+          <img [src]="selectedQrCodeUrl" alt="QR Code" class="w-32 h-32 object-contain border p-2" />
+        </div>
+
+        <button (click)="showQrCode(r.id!)" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded">
+          Voir QR Code
+        </button>
+        
         
       </div>
       
