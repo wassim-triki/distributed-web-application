@@ -1,29 +1,76 @@
+/* Header Styles */
 .header {
-    background-color: #154170;
-    color: white;
-    padding: 15px 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #154170;
+  color: white;
+  padding: 15px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Container */
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+/* Logo */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Desktop Navigation */
+.nav-links {
+  display: flex;
+}
+
+.nav-item {
+  color: white;
+  margin-right: 20px;  /* Espacement entre les liens */
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px;
+  transition: background 0.3s ease-in-out;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: #FFC107;
+  text-decoration: underline;
+}
+
+/* Mobile Menu Button */
+#menu-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+}
+
+.mobile-menu a:hover {
+  background-color: #2d3c5c;
+}
+
+/* Mobile Menu toggle on smaller screens */
+@media (max-width: 767px) {
+  .nav-links {
+    display: none; /* Hide desktop menu */
   }
-  
-  .header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 40px;
+  .mobile-menu {
+    display: block; /* Show mobile menu */
   }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  nav a:hover, nav a.active {
-    text-decoration: underline;
-  }
+}
