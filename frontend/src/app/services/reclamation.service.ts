@@ -38,6 +38,23 @@ export class ReclamationService {
 
    
 
+   
+
+  getMonthlyStats(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/stats/monthly`);
+  }
+
+  downloadPdf(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/pdf`, { responseType: 'blob' });
+  }
+
+  getReclamationsByType(type: string): Observable<Reclamation[]> {
+    return this.http.get<Reclamation[]>(`${this.apiUrl}/filter`, {
+      params: { type }
+    });
+  }
+  
+
 
 
 }

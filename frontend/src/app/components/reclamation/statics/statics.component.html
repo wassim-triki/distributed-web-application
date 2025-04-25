@@ -1,0 +1,15 @@
+<div class="stats-container">
+  
+
+  <h3 class="section-title">📅 Statistiques Mensuelles</h3>
+  <div class="card monthly-stats" *ngIf="monthlyStats">
+    <ul class="month-list">
+      <li class="month-item" *ngFor="let entry of monthlyStats | keyvalue">
+        <span class="month">{{ entry.key }}:</span>
+        <span class="count">{{ entry.value }} réclamations</span>
+      </li>
+    </ul>
+  </div>
+
+  <button class="btn-download" (click)="downloadPdf()">📄 Télécharger PDF</button>
+</div>

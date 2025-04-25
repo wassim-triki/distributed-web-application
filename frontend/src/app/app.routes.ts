@@ -11,7 +11,9 @@ import { ListStockComponent } from './components/stock/list-stock/list-stock.com
 import { AddStockComponent } from './components/stock/add-stock/add-stock.component';
 import { ModifyStockComponent } from './components/stock/modify-stock/modify-stock.component';
 import { ViewStockComponent } from './components/stock/view-stock/view-stock.component';
+import { StaticsComponent } from './components/reclamation/statics/statics.component'; 
 
+ 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -31,7 +33,7 @@ export const routes: Routes = [
   { path: 'reclamation-detail/:id', component: DetailReclamationComponent },
   { path: 'addreclamation', component: AddReclamationComponent },
 
-
+   {path: 'reclamationstatics', component: StaticsComponent}, 
   //Stock
   { path: 'stocks', component: ListStockComponent },
   {path : 'add-stock', component: AddStockComponent},

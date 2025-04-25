@@ -1,0 +1,101 @@
+.stats-container {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .section-title {
+    font-size: 1.6rem;
+    margin: 1.5rem 0 1rem;
+    color: #333;
+  }
+  
+  .card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+  
+  .label {
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .value {
+    font-weight: 600;
+    color: #007bff;
+  }
+  
+  /* Bar graph styles */
+  .monthly-bar-graph .bar-container {
+    margin-bottom: 1rem;
+  }
+  
+  .bar-label {
+    display: inline-block;
+    width: 100px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .bar {
+    background: #e0e0e0;
+    height: 24px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: inline-block;
+    width: 70%;
+    position: relative;
+    vertical-align: middle;
+  }
+  
+  .bar-fill {
+    height: 100%;
+    background: #28a745;
+    width: 0;
+    transition: width 0.6s ease;
+    position: relative;
+  }
+  
+  .bar-fill::after {
+    content: attr(data-count) " réclamations";
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Download button */
+  .btn-download {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .btn-download:hover {
+    background-color: #0056b3;
+  }
+  
